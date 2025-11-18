@@ -1,0 +1,32 @@
+.content-div{
+    height: 90vh !important;
+
+}
+.role-text{
+    color: rgb(157, 159, 161);
+    font-size: small;
+}
+
+.content-div-services .card-role{
+    height: 40%;
+}
+
+.card-content {
+    margin-top: 1px;
+    width: 80%;
+    height: 16%;
+    display: flex;
+    border: 1px solid black;
+    justify-content: space-around;
+}
+
+.card-body span{
+    font-size: 12px;
+    color: rgb(90, 91, 92);
+}
+
+/* .card-list button{
+    width: 15%;
+    padding: 2px;
+    height: 10%;
+} */
