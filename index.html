@@ -10,7 +10,7 @@
 
     <title>workspace</title>
     <link rel="stylesheet" href="style.css">
-    
+
 
 </head>
 
@@ -21,23 +21,16 @@
             <!-- <div class="col-1"></div> -->
             <div class="col-xl-3  col-md-12 border border-primary d-flex flex-column vh-100 content-div">
                 <h6 class="mt-1">les employees(non assigne)</h6>
-                <div id="card-employer" class="row card mt-2 d-flex flex-row">
-                    <div class="card-head mt-3 col-3">
-                        <img class="w-100 h-75 rounded-circle" src="profile.png" alt="">
-                    </div>
-                    <div class="card-body col-6 d-flex flex-column">
-                        <p class="fs-5">Salah-eddine</p>
-                        <span class="role-text">developpeur</span>
-                    </div>
+                <div id="card-employer">
+                    <!-- ici les noveaux emplyers  -->
 
-                    <div class="mt-3 col-3 bg-light">
-                        <button class="btn-sm btn btn-outline-success text-color-success mt-3">Edit</button>
-                    </div>
                 </div>
+
 
                 <div class="col-12 mt-5">
 
-                    <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">ajouter noveau emplyee</button>
+                    <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">ajouter
+                        noveau emplyee</button>
                 </div>
 
 
@@ -51,7 +44,7 @@
             <div class="col-lg-9 col-md- d-flex flex-column justify-content-around  border vh-100 content-div-services">
                 <div class="row card-role d-flex flex-row justify-content-around">
 
-                    <div class="col-3 border border-danger d-flex flex-column card-list">
+                    <div id="salleReception" class="col-3 border border-danger d-flex flex-column card-list">
                         <h5 class="text-success">Salle Réception</h5>
                         <div class="card flex-row gap-2 h-25 w-100 card-item">
                             <div class="card-head">
@@ -66,24 +59,27 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary">+</button>
+                        <button class="btn btn-primary assigne" data-bs-toggle="modal" data-bs-target="#staticBackdrop">+</button>
 
                     </div>
 
+                    <div id="salleServeurs" class="col-3  border border-danger">
+                        <h5 class="text-success"> serveurs</h5>
+                        <button class="btn btn-primary assigne" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >+</button>
+                    </div>
                     <div class="col-3  border border-danger">
-                        <h5 class="text-success">Salle Réception</h5>
+                        <h5 class="text-success">Sécurité</h5>
                     </div>
-                    <div class="col-3  border border-danger">rom services</div>
                 </div>
 
                 <div class="row card-role d-flex flex-row justify-content-around">
 
-                    <div class="col-3 border border-danger">
-                        <h4 class="text-success">rom services</h4>
+                    <div id="salleSecurite" class="col-3 border border-danger">
+                        <h5 class="text-success">rom</h5>
                     </div>
 
                     <div class="col-3  border border-danger">
-                        <h4>ROMS</h4>
+                        <h5 class="text-success">archivers</h5>
                         <div class="card flex-row gap-2 h-25 w-100">
                             <div class="card-head">
                                 <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
@@ -109,11 +105,10 @@
 
 
             <!-- Button trigger modal -->
-            
+
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -121,30 +116,78 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form >
+                            <form id="firstform">
                                 <label class="form-label" for="name">Nom :</label>
-                                <input class="form-control" id="name" type="text">
+                                <input class="form-control" id="name" name="name" type="text">
                                 <label for="email">Email : </label>
-                                <input class="form-control" id="email" type="text">
+                                <input class="form-control" id="email" name="email" type="text">
+
+                                <label for="role">Role :</label>
+                                <select class="form-select" name="role" id="role">
+                                    <option value="developpeur">developpeur</option>
+                                    <option value="Securite">Securite</option>
+                                    <option value="staff">staff</option>
+                                    <option value="reception">reception</option>
+                                    <option value="manager">manager</option>
+                                    <option value="archiver">archiver</option>
+
+                                </select>
+
                                 <label for="tele">Telephone : </label>
-                                <input type="tel" class="form-control" id="tele">
+                                <input type="tel" class="form-control" name='tele' id="tele">
                                 <label for="photo">Photo : </label>
-                                <input type="file" id="photo" class="form-control">
+                                <input type="file" id="photo" name="photo" class="form-control">
                                 <label for="localisation">Localisation actuelle : </label>
-                                <input type="text" id="localisation" class="form-control" >
+                                <input type="text" id="localisation" name="localisation" class="form-control">
+                                <button type="button" id="btn-dynamique"
+                                    class="btn btn-success mt-2">Expériences</button>
+                                <div id="card-dynamique">
+                                    <!-- ici les champs formulaire -->
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <input type="submit" value="save" class="btn btn-primary">
+                                </div>
+
+
                             </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Modal pour l'affichages de emplyer non assigne  -->
+
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div id="modal-body" class="modal-body">
+                            ...
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary">Understood</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <script src="/scrip.js" ></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-            
+
+
+            <script src="/scrip.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+                crossorigin="anonymous"></script>
+
 
 </body>
 
