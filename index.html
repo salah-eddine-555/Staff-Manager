@@ -19,7 +19,7 @@
     <div class="container-fluid mt-5">
         <div class="row">
             <!-- <div class="col-1"></div> -->
-            <div class="col-xl-3  col-md-12 border border-primary d-flex flex-column vh-100 content-div">
+            <div class="col-xl-3  col-sm-12 border border-primary d-flex flex-column vh-100 content-div">
                 <h6 class="mt-1">les employees(non assigne)</h6>
                 <div id="card-employer">
                     <!-- ici les noveaux emplyers  -->
@@ -41,11 +41,12 @@
 
 
 
-            <div class="col-lg-9 col-md- d-flex flex-column justify-content-around  border vh-100 content-div-services">
+            <div class="col-xl-9 col-sm-12 d-flex flex-column justify-content-around  border vh-100 content-div-services">
                 <div class="row card-role d-flex flex-row justify-content-around">
 
-                    <div id="salleReception" class="col-3 border border-danger d-flex flex-column card-list">
-                        <h5 class="text-success">Salle Réception</h5>
+                    <div id="salleReception" class="col-xl-3 col-sm-1 h-sm-100 border border-danger d-flex flex-column card-list">
+                        <h5 class="text-success roleName">Salle Réception</h5>
+
                         <div class="card flex-row gap-2 h-25 w-100 card-item">
                             <div class="card-head">
                                 <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
@@ -63,23 +64,27 @@
 
                     </div>
 
-                    <div id="salleServeurs" class="col-3  border border-danger">
-                        <h5 class="text-success"> serveurs</h5>
+                    <div id="salleServeurs" class="col-xl-3 col-sm-1 h-sm-100 border border-danger">
+                        <h5 class="text-success roleName">Salle serveurs</h5>
                         <button class="btn btn-primary assigne" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >+</button>
                     </div>
-                    <div class="col-3  border border-danger">
-                        <h5 class="text-success">Sécurité</h5>
+                    <div class="col-xl-3 col-sm-1 h-sm-100  border border-danger">
+                        <h5 class="text-success roleName">Salle Sécurité</h5>
+                        
+                        <button class="btn btn-primary assigne" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >+</button>
+
                     </div>
                 </div>
 
                 <div class="row card-role d-flex flex-row justify-content-around">
 
-                    <div id="salleSecurite" class="col-3 border border-danger">
-                        <h5 class="text-success">rom</h5>
+                    <div id="salleStaff" class="col-xl-3 col-sm-1 h-sm-100  border border-danger">
+                        <h5 class="text-success roleName">Salle Conference</h5>
+                        <button class="btn btn-primary assigne" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >+</button>
                     </div>
 
-                    <div class="col-3  border border-danger">
-                        <h5 class="text-success">archivers</h5>
+                    <div class="col-xl-3 col-sm-1 h-sm-100  border border-danger">
+                        <h5 class="text-success roleName">staff Rom</h5>
                         <div class="card flex-row gap-2 h-25 w-100">
                             <div class="card-head">
                                 <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
@@ -89,13 +94,17 @@
                                 <span>developpeur</span>
                             </div>
                             <div class="d-flex align-items-center">
-                                <button class="btn btn-link-success"><i class="bi bi-pencil"></i></button>
+                                <button class="btn btn-link-success "><i class="bi bi-pencil"></i></button>
                             </div>
                         </div>
+                        <button class="btn btn-primary assigne" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >+</button>
 
 
                     </div>
-                    <div class="col-3  border border-danger">rom services</div>
+                    <div class="col-xl-3 col-sm-1 h-sm-100   border border-danger">
+                        <h5 class="text text-success">Salle Archiver</h5>
+                        <button class="btn btn-primary assigne" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >+</button>
+                    </div>
                 </div>
             </div>
 
@@ -112,7 +121,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 class="modal-title text-success" id="exampleModalLabel">Ajouter employees</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -124,19 +133,17 @@
 
                                 <label for="role">Role :</label>
                                 <select class="form-select" name="role" id="role">
-                                    <option value="developpeur">developpeur</option>
+                                    <option value="Techniciens IT">Techniciens IT</option>
                                     <option value="Securite">Securite</option>
                                     <option value="staff">staff</option>
                                     <option value="reception">reception</option>
                                     <option value="manager">manager</option>
-                                    <option value="archiver">archiver</option>
+                                    <option value="nettoyage">nettoyage</option>
 
                                 </select>
 
                                 <label for="tele">Telephone : </label>
                                 <input type="tel" class="form-control" name='tele' id="tele">
-                                <label for="photo">Photo : </label>
-                                <input type="file" id="photo" name="photo" class="form-control">
                                 <label for="localisation">Localisation actuelle : </label>
                                 <input type="text" id="localisation" name="localisation" class="form-control">
                                 <button type="button" id="btn-dynamique"
@@ -171,7 +178,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div id="modal-body" class="modal-body">
-                            ...
+                            <!-- ici la listes de employers-->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
