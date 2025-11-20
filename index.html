@@ -16,23 +16,68 @@
 
 <body>
 
+    <head>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Staff Manager</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </head>
+
     <div class="container-fluid mt-5">
         <div class="row">
             <!-- <div class="col-1"></div> -->
             <div class="col-xl-3  col-sm-12 border border-primary d-flex flex-column vh-100 content-div">
                 <h6 class="mt-1">les employees(non assigne)</h6>
-                <div id="card-employer">
-                    <!-- ici les noveaux emplyers  -->
-
-                </div>
-
-
                 <div class="col-12 mt-5">
 
                     <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">ajouter
                         noveau emplyee</button>
                 </div>
 
+                <div id="card-employer">
+                    <!-- ici les noveaux emplyers  -->
+
+                </div>
+
+
+                
 
 
 
@@ -44,34 +89,51 @@
             <div class="col-xl-9 col-sm-12 d-flex flex-column justify-content-around  border vh-100 content-div-services">
                 <div class="row card-role d-flex flex-row justify-content-around">
 
-                    <div id="salleReception" class="col-xl-3 col-sm-1 h-sm-100 border border-danger d-flex flex-column card-list">
+                    <div id="salleReception"
+                        class="col-xl-3 col-sm-1 h-sm-100 border border-danger d-flex flex-column card-list">
                         <h5 class="text-success roleName">Salle Réception</h5>
 
-                        <div class="card flex-row gap-2 h-25 w-100 card-item">
-                            <div class="card-head">
-                                <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
-                            </div>
-                            <div class="card-body p-0 d-flex flex-column justify-content-around">
-                                <p>salah-eddine</p>
-                                <span>developpeur</span>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <button class="btn btn-link-success"><i class="bi bi-pencil"></i></button>
-                            </div>
+
+                        <!---->
+
+
+                        <div class="card flex-row gap-2 h-25 w-100 card-item" id="card-reception">
+                            <!-- <div class="card-head">
+                                    <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
+                                </div>
+                                <div class="card-body p-0 d-flex flex-column justify-content-around">
+                                    <p>salah-eddine</p>
+                                    <span>developpeur</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <button class="btn btn-link"><i class="bi bi-trash text-danger"></i></button>
+                                </div> -->
                         </div>
 
-                        <button class="btn btn-primary assigne" data-bs-toggle="modal" data-bs-target="#staticBackdrop">+</button>
+
+
+
+
+                        <button class="btn btn-primary assigne" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">+</button>
 
                     </div>
 
                     <div id="salleServeurs" class="col-xl-3 col-sm-1 h-sm-100 border border-danger">
                         <h5 class="text-success roleName">Salle serveurs</h5>
-                        <button class="btn btn-primary assigne" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >+</button>
+
+                        <div class="card-liste-serveurs">
+                            <!---->
+
+                        </div>
+                        <button class="btn btn-primary assigne" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">+</button>
                     </div>
                     <div class="col-xl-3 col-sm-1 h-sm-100  border border-danger">
                         <h5 class="text-success roleName">Salle Sécurité</h5>
-                        
-                        <button class="btn btn-primary assigne" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >+</button>
+
+                        <button class="btn btn-primary assigne" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">+</button>
 
                     </div>
                 </div>
@@ -80,7 +142,8 @@
 
                     <div id="salleStaff" class="col-xl-3 col-sm-1 h-sm-100  border border-danger">
                         <h5 class="text-success roleName">Salle Conference</h5>
-                        <button class="btn btn-primary assigne" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >+</button>
+                        <button class="btn btn-primary assigne" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">+</button>
                     </div>
 
                     <div class="col-xl-3 col-sm-1 h-sm-100  border border-danger">
@@ -97,13 +160,15 @@
                                 <button class="btn btn-link-success "><i class="bi bi-pencil"></i></button>
                             </div>
                         </div>
-                        <button class="btn btn-primary assigne" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >+</button>
+                        <button class="btn btn-primary assigne" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">+</button>
 
 
                     </div>
                     <div class="col-xl-3 col-sm-1 h-sm-100   border border-danger">
                         <h5 class="text text-success">Salle Archiver</h5>
-                        <button class="btn btn-primary assigne" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >+</button>
+                        <button class="btn btn-primary assigne" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">+</button>
                     </div>
                 </div>
             </div>

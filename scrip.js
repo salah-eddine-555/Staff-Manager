@@ -1,7 +1,19 @@
-
 count = 1;
-const employers = [
-    {   
+let employers = [];
+
+
+
+
+
+window.addEventListener('load', () => {
+    employers = JSON.parse(localStorage.getItem('worker')) || [];
+    AfficcherEmplyeesNonAssigne();
+})
+
+
+
+let salleReceptions = [
+    {
         id: count,
         name: "salah-eddine",
         email: "salah@gmail.com",
@@ -10,28 +22,19 @@ const employers = [
         photo: 'profile.png',
         localisation: "youssoufia/Rue01",
         expreiences: {
-                    company: "companyX",
-                    duree: "1 mois"
-                    }    
+            company: "companyX",
+            duree: "1 mois"
+        }
     },
-    {   
-        id: count,
-        name: "salah-eddine",
-        email: "salah@gmail.com",
-        role: "manager",
-        tele: "+212 623232",
-        photo: 'profile.png',
-        localisation: "youssoufia/Rue01",
-        expreiences: {
-                    company: "companyX",
-                    duree: "1 mois"
-                    }    
-    }
+
 ]
 
-let salleReception = []
-let salleServeurs = []
-let salleSecurite = []
+
+// let salleServeurs = []
+// let salleSecurites = []
+// let salleConferences = []
+// let sallestaffRoms = []
+// let salleArchivers = []
 
 
 
@@ -39,12 +42,12 @@ let salleSecurite = []
 
 
 
-document.getElementById('btn-dynamique').addEventListener('click', ()=> {
+document.getElementById('btn-dynamique').addEventListener('click', () => {
     FormDynamique();
 })
 
 
-function FormDynamique(){
+function FormDynamique() {
     let card = `
         <label class="form-label " for="company">company :</label>
         <input class="form-control" id="company" name="company" type="text">
@@ -54,14 +57,14 @@ function FormDynamique(){
     `
     document.getElementById('card-dynamique').innerHTML += card;
 
- 
+
 }
 
-function ValidationDataNoveauEmplyee(){
-     const form = document.getElementById('firstform');
+function ValidationDataNoveauEmplyee() {
+    const form = document.getElementById('firstform');
 
     // recupere les donners a saisie par l utilsateur
-    form.addEventListener("submit", function(e){
+    form.addEventListener("submit", function (e) {
         e.preventDefault();
 
         let newEmplyer = {};
@@ -69,12 +72,12 @@ function ValidationDataNoveauEmplyee(){
         const name = form.name.value;
         const email = form.email.value;
         const role = form.role.value;
-        const tele  = form.tele.value;
+        const tele = form.tele.value;
         const localisation = form.localisation.value;
-        
-        
 
-        
+
+
+
         const company = document.getElementById('company').value;
         const duree = document.getElementById('duree').value;
 
@@ -85,54 +88,52 @@ function ValidationDataNoveauEmplyee(){
 
 
         // les champs qui sont oblegatore remplir par l utilisateur 
-        if(name.trim() == '' || email.trim() == '' || role.trim() == '' || tele.trim() == '' || localisation.trim() == ''){
+        if (name.trim() == '' || email.trim() == '' || role.trim() == '' || tele.trim() == '' || localisation.trim() == '') {
             alert("Les champs sont oblegatoire a remplir")
             return;
-        }else if( validateEmail.test(email) && validateName.test(name) && validateNumber.test(tele)){
+        } else if (validateEmail.test(email) && validateName.test(name) && validateNumber.test(tele)) {
 
             newEmplyer = {
-                    id: ++count,
-                    name: name,
-                    email: email,
-                    role: role,
-                    tele: tele,
-                    localisation: localisation,
-                    expreiences : {
-                            company : company,
-                            duree: duree
-                            }
-                    }
+                id: count++,
+                name: name,
+                email: email,
+                role: role,
+                tele: tele,
+                localisation: localisation,
+                expreiences: {
+                    company: company,
+                    duree: duree
+                }
+            }
 
-                
-        }else {
+
+        } else {
             alert("les champs n'est pas valide !");
-        }  
+        }
 
-       AjouterNoveauEmployer(newEmplyer);
+        AjouterNoveauEmployer(newEmplyer);
 
         form.reset();
-      
+
     })
 }
 
-function AjouterNoveauEmployer(newEmplyer){
-    
-  
+function AjouterNoveauEmployer(newEmplyer) {
     employers.push(newEmplyer);
-
+    localStorage.setItem('worker', JSON.stringify(employers));
      AfficcherEmplyeesNonAssigne()
 
 }
 
 ValidationDataNoveauEmplyee()
 
-function AfficcherEmplyeesNonAssigne(){
+function AfficcherEmplyeesNonAssigne() {
 
     let cardEmplyees = '';
 
-    for(employer of employers){
-        cardEmplyees +=`
-          
+    employers.forEach(employer => {
+
+         cardEmplyees += `
                 <div class="row card mt-2 d-flex flex-row ">
                     <div class="card-head mt-3 col-3">
                         <img class="w-100 h-50 rounded-circle" src="profile.png" alt="">
@@ -147,46 +148,64 @@ function AfficcherEmplyeesNonAssigne(){
                     </div>
                 </div>
         `
-    }
+    })
+     document.getElementById('card-employer').innerHTML = cardEmplyees;
+
+    // for (employer of employers) {
+    //     cardEmplyees += `
+          
+    //             <div class="row card mt-2 d-flex flex-row ">
+    //                 <div class="card-head mt-3 col-3">
+    //                     <img class="w-100 h-50 rounded-circle" src="profile.png" alt="">
+    //                 </div>
+    //                 <div class="card-body col-6 d-flex flex-column">
+    //                     <p class="fs-5">${employer.name}</p>
+    //                     <span class="role-text">${employer.role}</span>
+    //                 </div>
+
+    //                 <div class="mt-3 col-3 bg-light">
+    //                     <button class="btn-sm btn btn-outline-success text-color-success mt-3">Edit</button>
+    //                 </div>
+    //             </div>
+    //     `
+    // }
+
    
-    document.getElementById('card-employer').innerHTML = cardEmplyees;
-    
+
 
 }
-
-AfficcherEmplyeesNonAssigne()
 
 
 // lorsque le click sur une button pour ajouter emplyer est afficher la listes des emplyes
 
 
-  document.querySelectorAll(".assigne").forEach(btn => {
-        btn.addEventListener("click", () => {
-            let parent = btn.parentElement
-            let nameZone = parent.querySelector('.roleName').textContent;
-            ListesEmployees(nameZone);
-             
-            
-        })
+document.querySelectorAll(".assigne").forEach(btn => {
+    btn.addEventListener("click", () => {
+        let parent = btn.parentElement
+        let nameZone = parent.querySelector('.roleName').textContent;
+        ListesEmployees(nameZone);
+
+
     })
+})
 
 // fonction qui lister les emplyer non assigne pour le assigne a une salles 
-function ListesEmployees(nameZone){
-    
-     let listEmplyees = '';
+function ListesEmployees(nameZone) {
+
+    let listEmplyees = '';
 
     document.getElementById('modal-body').innerHTML = "";
 
     employers.forEach(employer => {
 
-         if((nameZone == 'Salle Réception' &&  employer.role == 'reception')
-             || (nameZone == 'Salle Réception' && employer.role == 'manager') 
-            || (nameZone == 'Salle Réception' && employer.role == 'nettoyage')){
-                            
+        if ((nameZone == 'Salle Réception' && employer.role == 'reception')
+            || (nameZone == 'Salle Réception' && employer.role == 'manager')
+            || (nameZone == 'Salle Réception' && employer.role == 'nettoyage')) {
 
-            console.log(1);
-             listEmplyees += `
-            <div class="card flex-row gap-2 h-25 w-100">
+
+        
+            listEmplyees += `
+            <div class="card flex-row gap-2 h-25 w-100 card-workers" data-id=${employer.id}>
                             <div class="card-head">
                                 <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
                             </div>
@@ -200,21 +219,16 @@ function ListesEmployees(nameZone){
                         </div>
         `
 
-        document.getElementById('modal-body').innerHTML  = listEmplyees;
-        
-
-        // console.log(employer.role);
-        
-
+            document.getElementById('modal-body').innerHTML = listEmplyees;
         }
 
-        
-        if((nameZone == 'Salle serveurs' && employer.role == 'Techniciens IT') 
+
+        if ((nameZone == 'Salle serveurs' && employer.role == 'Techniciens IT')
             || (nameZone == 'Salle serveurs' && employer.role == 'manager')
-            || (nameZone == 'Salle serveurs' && employer.role == 'nettoyage')){
-            console.log(employer);
+            || (nameZone == 'Salle serveurs' && employer.role == 'nettoyage')) {
+
             listEmplyees += `
-            <div class="card flex-row gap-2 h-25 w-100">
+            <div class="card flex-row gap-2 h-25 w-100 card-workers" data-id=${employer.id}>
                             <div class="card-head">
                                 <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
                             </div>
@@ -228,16 +242,15 @@ function ListesEmployees(nameZone){
                         </div>
         `
 
-        document.getElementById('modal-body').innerHTML  = listEmplyees;
-        console.log(2);
+            document.getElementById('modal-body').innerHTML = listEmplyees;
         }
-        
 
-        if((nameZone == 'Salle Sécurité' && employer.role == 'Securite')
-            || (nameZone == 'Salle Sécurité' && employer.role == 'manager' )
-            || (nameZone == 'Salle Sécurité' && employer.role == 'nettoyage')){
+
+        if ((nameZone == 'Salle Sécurité' && employer.role == 'Securite')
+            || (nameZone == 'Salle Sécurité' && employer.role == 'manager')
+            || (nameZone == 'Salle Sécurité' && employer.role == 'nettoyage')) {
             listEmplyees += `
-            <div class="card flex-row gap-2 h-25 w-100">
+            <div class="card flex-row gap-2 h-25 w-100 card-workers" data-id=${employer.id}>
                             <div class="card-head">
                                 <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
                             </div>
@@ -250,15 +263,14 @@ function ListesEmployees(nameZone){
                             </div>
                         </div>
         `
-        document.getElementById('modal-body').innerHTML  = listEmplyees;
-      console.log(3);
+            document.getElementById('modal-body').innerHTML = listEmplyees;
         }
 
-         if((nameZone == 'Salle Conference' && employer.role == 'manager' )
+        if ((nameZone == 'Salle Conference' && employer.role == 'manager')
             || (nameZone == 'Salle Conference' && employer.role == 'Techniciens IT')
-            || (nameZone == 'Salle Conference' && employer.role== 'nettoyage')){
+            || (nameZone == 'Salle Conference' && employer.role == 'nettoyage')) {
             listEmplyees += `
-            <div class="card flex-row gap-2 h-25 w-100">
+            <div class="card flex-row gap-2 h-25 w-100 card-workers"  data-id=${employer.id}>
                             <div class="card-head">
                                 <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
                             </div>
@@ -271,15 +283,13 @@ function ListesEmployees(nameZone){
                             </div>
                         </div>
         `
-        document.getElementById('modal-body').innerHTML  = listEmplyees;
-        console.log(4);
-      
+            document.getElementById('modal-body').innerHTML = listEmplyees;
         }
 
-        
-        if(nameZone == 'Salle Archiver' && employer.role == 'manager'){
+
+        if (nameZone == 'Salle Archiver' && employer.role == 'manager') {
             listEmplyees += `
-            <div class="card flex-row gap-2 h-25 w-100">
+            <div class="card flex-row gap-2 h-25 w-100 card-workers" data-id=${employer.id}>
                             <div class="card-head">
                                 <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
                             </div>
@@ -292,17 +302,15 @@ function ListesEmployees(nameZone){
                             </div>
                         </div>
         `
-        document.getElementById('modal-body').innerHTML  = listEmplyees;
-        console.log(44)
-
+            document.getElementById('modal-body').innerHTML = listEmplyees;
         }
 
-         if((nameZone == 'staff Rom'&& employer.role == 'manager')
-            || (nameZone == 'staff Rom'&& employer.role == 'Techniciens IT')
-            || (nameZone == 'staff Rom' && employer.role== 'nettoyage' )
-            || (nameZone  == 'staff Rom' && employer.role== 'Securite')){
+        if ((nameZone == 'staff Rom' && employer.role == 'manager')
+            || (nameZone == 'staff Rom' && employer.role == 'Techniciens IT')
+            || (nameZone == 'staff Rom' && employer.role == 'nettoyage')
+            || (nameZone == 'staff Rom' && employer.role == 'Securite')) {
             listEmplyees += `
-            <div class="card flex-row gap-2 h-25 w-100">
+            <div class="card flex-row gap-2 h-25 w-100 card-workers"  data-id=${employer.id}>
                             <div class="card-head">
                                 <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
                             </div>
@@ -315,16 +323,95 @@ function ListesEmployees(nameZone){
                             </div>
                         </div>
         `
-        document.getElementById('modal-body').innerHTML  = listEmplyees;
-        console.log(6);
-      
+            document.getElementById('modal-body').innerHTML = listEmplyees;
         }
-      
+
     })
 }
+
+
+function AffichageEmployesReception() {
+    let carReception = '';
+
+    for (receptioniste of salleReceptions) {
+        carReception += `
+                    <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
+                         <div class="card-head">
+                                <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
+                        </div>
+                        <div class="card-body p-0 d-flex flex-column justify-content-around">
+                            <p>${receptioniste.name}</p>
+                            <span>${receptioniste.name}</span>
+                        </div>
+                      <div class="d-flex align-items-center">
+                        <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                    </div>
+                    </div>
+                   
+        `
+        document.getElementById("card-reception").innerHTML = carReception;
+
+    }
+
+
+}
+AffichageEmployesReception()
+
+
+
+
+
+document.getElementById('modal-body').addEventListener("click", (e)=> {
+    const card = e.target.closest('.card-workers');
+    const IdWorker = card.dataset.id
+    console.log(IdWorker);
+    AddWorkertoSalle(IdWorker);
+    
+})
+
+function AddWorkertoSalle(IdWorker){
+
+    const worker = employers.find(employer => employer.id == IdWorker)
+    console.log(worker.role)
+    console.log(worker)
+   
+    if(worker.role == 'reception' || worker.role == 'manager' || worker.role == 'nettoyage'){
+
+        salleReceptions.push(worker);
+        AffichageEmployesReception()
+    }
     
 
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ///////////////////////////////////////////////////////
+
+//on ajouter un evenement lorsque le click sur le card pour la liste des emplyes chauc'un pour ce role 
+// on recuepere l id est le role de card d'emplyer a clicke 
+// on chercher par l id d'emplyes selectionee dans la liste principale 
+// apres ajouter le card d'emplyee a selctionee dans le zone selon son role on ajouter dans la list zone []
+// apres supprimer l'employer dans le tableaux principale emplyoers 
+
+
+
+
+
+
 
 
 

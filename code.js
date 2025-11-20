@@ -97,3 +97,10 @@
 // }
     
 // ///////////////////////////////////////////////////////
+
+// document.querySelectorAll('.card-employees').forEach(card => {
+//     card.addEventListener('click', () => {
+//         let id = card.dataset.id;
+//         console.log('click id : ', id);
+//     })
+// })
