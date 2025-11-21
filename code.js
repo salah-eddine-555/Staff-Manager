@@ -104,3 +104,30 @@
 //         console.log('click id : ', id);
 //     })
 // })
+////////////////////////////
+
+    if((worker.role == 'reception') || (worker.role == 'manager') || (worker.role == 'nettoyage')){
+
+        salleReceptions.push(worker);
+        AffichageEmployesReception()
+        console.log(1)
+        
+    }
+    if(worker.role == 'Techniciens IT' || worker.role == 'manager' || worker.role == 'nettoyage'){
+        salleServeurs.push(worker)
+        AffichageEmployesServeurs()
+        console.log(2)
+      
+    }
+    if(worker.role == 'securite' || worker.role == 'manager' || worker.role == 'nettoyage'){
+        salleSecurites.push(worker);
+    }
+    if(worker.role == 'securite' || worker.role == 'manager' || worker.role == 'nettoyage'|| worker.role == 'Techniciens IT'){
+        sallestaffRoms.push(worker);
+    }
+    if(worker.role == 'manager'){
+        salleArchivers.push(worker);
+    }
+    if(worker.role == 'securite' || worker.role == 'manager' || worker.role == 'nettoyage'|| worker.role == 'Techniciens IT'){
+        salleConferences.push(worker);
+    }

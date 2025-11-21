@@ -1,9 +1,5 @@
-count = 1;
+count = 0;
 let employers = [];
-
-
-
-
 
 window.addEventListener('load', () => {
     employers = JSON.parse(localStorage.getItem('worker')) || [];
@@ -21,20 +17,15 @@ let salleReceptions = [
         tele: "+212 623232",
         photo: 'profile.png',
         localisation: "youssoufia/Rue01",
-        expreiences: {
-            company: "companyX",
-            duree: "1 mois"
-        }
-    },
-
+        expreiences: [{company: "companyX", duree: "1 mois"}]
+    }
 ]
 
-
-// let salleServeurs = []
-// let salleSecurites = []
-// let salleConferences = []
-// let sallestaffRoms = []
-// let salleArchivers = []
+let salleServeurs = []
+let salleSecurites = []
+let sallestaffRoms = []
+let salleArchivers = []
+let salleConferences = []
 
 
 
@@ -94,16 +85,14 @@ function ValidationDataNoveauEmplyee() {
         } else if (validateEmail.test(email) && validateName.test(name) && validateNumber.test(tele)) {
 
             newEmplyer = {
-                id: count++,
+                id: ++count,
                 name: name,
                 email: email,
                 role: role,
                 tele: tele,
                 localisation: localisation,
-                expreiences: {
-                    company: company,
-                    duree: duree
-                }
+                expreiences: [{company: company, duree: duree}]
+                
             }
 
 
@@ -134,7 +123,7 @@ function AfficcherEmplyeesNonAssigne() {
     employers.forEach(employer => {
 
          cardEmplyees += `
-                <div class="row card mt-2 d-flex flex-row ">
+                <div class="row card mt-2 d-flex flex-row">
                     <div class="card-head mt-3 col-3">
                         <img class="w-100 h-50 rounded-circle" src="profile.png" alt="">
                     </div>
@@ -144,35 +133,12 @@ function AfficcherEmplyeesNonAssigne() {
                     </div>
 
                     <div class="mt-3 col-3 bg-light">
-                        <button class="btn-sm btn btn-outline-success text-color-success mt-3">Edit</button>
+                        <button class="btn-sm btn btn-outline-success text-color-success mt-3 profile-btn" id="${employer.id}"  data-bs-toggle="modal" data-bs-target="#btnmodal">Details</button>
                     </div>
                 </div>
         `
     })
      document.getElementById('card-employer').innerHTML = cardEmplyees;
-
-    // for (employer of employers) {
-    //     cardEmplyees += `
-          
-    //             <div class="row card mt-2 d-flex flex-row ">
-    //                 <div class="card-head mt-3 col-3">
-    //                     <img class="w-100 h-50 rounded-circle" src="profile.png" alt="">
-    //                 </div>
-    //                 <div class="card-body col-6 d-flex flex-column">
-    //                     <p class="fs-5">${employer.name}</p>
-    //                     <span class="role-text">${employer.role}</span>
-    //                 </div>
-
-    //                 <div class="mt-3 col-3 bg-light">
-    //                     <button class="btn-sm btn btn-outline-success text-color-success mt-3">Edit</button>
-    //                 </div>
-    //             </div>
-    //     `
-    // }
-
-   
-
-
 }
 
 
@@ -336,14 +302,13 @@ function AffichageEmployesReception() {
     for (receptioniste of salleReceptions) {
         carReception += `
                     <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
-                         <div class="card-head">
-                                <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
+                         <div class="col-3 card-head">
+                                <img class="w-100 h-50 rounded-circle mt-2" src="profile.png" alt="">
                         </div>
-                        <div class="card-body p-0 d-flex flex-column justify-content-around">
+                        <div class="col-4 card-body p-0 d-flex flex-column justify-content-around">
                             <p>${receptioniste.name}</p>
-                            <span>${receptioniste.name}</span>
                         </div>
-                      <div class="d-flex align-items-center">
+                      <div class="col-3 d-flex align-items-center">
                         <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
                     </div>
                     </div>
@@ -355,12 +320,113 @@ function AffichageEmployesReception() {
 
 
 }
+
+
+function  AffichageEmployesServeurs() {
+    let carReception = '';
+
+    for (receptioniste of salleReceptions) {
+        carReception += `
+                    <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
+                         <div class="col-3 card-head">
+                                <img class="w-100 h-50 rounded-circle mt-2" src="profile.png" alt="">
+                        </div>
+                        <div class="col-4 card-body p-0 d-flex flex-column justify-content-around">
+                            <p>${receptioniste.name}</p>
+                        </div>
+                      <div class="col-3 d-flex align-items-center">
+                        <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                    </div>
+                    </div>
+                   
+        `
+        document.getElementById("card-serveurs").innerHTML = carReception;
+    }
+
+
+}
+
+function AffichageEmployesSecurites(){
+     let carReception = '';
+
+    for (receptioniste of salleReceptions) {
+        carReception += `
+                    <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
+                         <div class="col-3 card-head">
+                                <img class="w-100 h-50 rounded-circle mt-2" src="profile.png" alt="">
+                        </div>
+                        <div class="col-4 card-body p-0 d-flex flex-column justify-content-around">
+                            <p>${receptioniste.name}</p>
+                        </div>
+                      <div class="col-3 d-flex align-items-center">
+                        <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                    </div>
+                    </div>
+                   
+        `
+        document.getElementById("card-securite").innerHTML = carReception;
+
+    }
+
+}
+
+function AfficherEmployesConferences(){
+  let carReception = '';
+
+    for (receptioniste of salleReceptions) {
+        carReception += `
+                    <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
+                         <div class="col-3 card-head">
+                                <img class="w-100 h-50 rounded-circle mt-2" src="profile.png" alt="">
+                        </div>
+                        <div class="col-4 card-body p-0 d-flex flex-column justify-content-around">
+                            <p>${receptioniste.name}</p>
+                        </div>
+                      <div class="col-3 d-flex align-items-center">
+                        <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                    </div>
+                    </div>
+                   
+        `
+        document.getElementById("card-conference").innerHTML = carReception;
+
+    }
+
+}
+
+function AfficherEmplyoesStaffRom(){
+      let carReception = '';
+
+    for (receptioniste of salleReceptions) {
+        carReception += `
+                    <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
+                         <div class="col-3 card-head">
+                                <img class="w-100 h-50 rounded-circle mt-2" src="profile.png" alt="">
+                        </div>
+                        <div class="col-4 card-body p-0 d-flex flex-column justify-content-around">
+                            <p>${receptioniste.name}</p>
+                        </div>
+                      <div class="col-3 d-flex align-items-center">
+                        <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                    </div>
+                    </div>
+                   
+        `
+        document.getElementById("card-staffRome").innerHTML = carReception;
+
+    }
+}
+
+
+
+
+AffichageEmployesServeurs()
 AffichageEmployesReception()
 
 
 
 
-
+// lorsque click sur un card est retouner id de son parent
 document.getElementById('modal-body').addEventListener("click", (e)=> {
     const card = e.target.closest('.card-workers');
     const IdWorker = card.dataset.id
@@ -374,29 +440,136 @@ function AddWorkertoSalle(IdWorker){
     const worker = employers.find(employer => employer.id == IdWorker)
     console.log(worker.role)
     console.log(worker)
-   
-    if(worker.role == 'reception' || worker.role == 'manager' || worker.role == 'nettoyage'){
 
+    let assinged = false
+
+
+    if(['reception', 'manager', 'reception', 'nettoyage'].includes(worker.role)){
         salleReceptions.push(worker);
-        AffichageEmployesReception()
+        AffichageEmployesReception();
+        console.log(1);
+        employers.splice(employers.findIndex(e=>e.id == IdWorker), 1);
+        AfficcherEmplyeesNonAssigne();
+        return 
+    }
+    if(['securite', 'manager', 'nettoyage'].includes(worker.role)){
+        salleServeurs.push(worker);
+        AffichageEmployesServeurs();
+        console.log(2);
+        employers.splice(employers.findIndex(e=>e.id == IdWorker), 1);
+        AfficcherEmplyeesNonAssigne();
+        return 
+    
+    }
+     if(['Techniciens IT', 'manager', 'nettoyage'].includes(worker.role)){
+        salleSecurites.push(worker);
+        AffichageEmployesSecurites();
+        console.log(3);
+         employers.splice(employers.findIndex(e=>e.id == IdWorker), 1);
+         AfficcherEmplyeesNonAssigne();
+        return 
+        
+    }
+    if(['manager', 'securite', 'nettoyage','Techniciens IT']){
+        salleConferences.push(worker);
+        AfficherEmployesConferences();
+        console.log(5)
+        employers.splice(employers.findIndex(e=>e.id == IdWorker), 1);
+        AfficcherEmplyeesNonAssigne();
+        return 
+    }
+    if(['manager', 'securite', 'nettoyage','Techniciens IT']){
+        sallestaffRoms.push(worker);
+        AfficherEmplyoesStaffRom();
+        employers.splice(employers.findIndex(e=>e.id == IdWorker), 1);
+        AfficcherEmplyeesNonAssigne();
+        return 
+    }
+    if(['manager'].includes(worker.role)){
+        salleArchivers.push(worker);
+        AfficherEmplyoesArchivers();
+        console.log(4);
+        
+        employers.splice(employers.findIndex(e=>e.id == IdWorker), 1)
+        AfficcherEmplyeesNonAssigne();
+        return 
+       
+    }    
+}
+
+
+
+// pour affciher details de profile pour chaque emplyees 
+// on recupere l 'id de emplyer pour chaque click 
+
+document.addEventListener("click", (e) => {
+    console.log(employers);
+    if (e.target.classList.contains("profile-btn")) {
+        const id = e.target.getAttribute("id");
+        console.log(id);
+        AfficherDetailsProfile(id);
+    }
+});
+
+function AfficherDetailsProfile(id){
+    
+    let html  = "";
+    document.getElementById('detais-worker').innerHTML = " ";
+
+    // recupere emplyer par id a parties la listed des emplyes 
+    let emplyoer = employers.find(emp => emp.id == id);
+
+   
+
+    if(!emplyoer){
+        alert("Non emplyoyer trouvee !");
+        return;
     }
     
 
-    
+
+
+
+        html = `
+            <div class="d-flex align-items-center mb-3">
+                                <img src="profile.png" alt="photo" class="rounded-circle me-3" width="100" height="100">
+
+                                <div>
+                                    <h5 class="mb-0 text-capitalize">${emplyoer.name}</h5>
+                                    <small class="text-muted">      ${emplyoer.role}</small>
+                                </div>
+                            </div>
+
+                          
+                            <p class="mb-1"><strong>Email:</strong>${emplyoer.email}</p>
+                            <p class="mb-3"><strong>Téléphone :</strong>${emplyoer.tele}</p>
+
+                           
+                            <p class="mb-3">
+                                <strong>Localisation :</strong> ${emplyoer.localisation}
+                            </p>
+                            
+                           `
+                            emplyoer.expreiences.forEach(exp => {
+                                                       html +=` 
+                                                           <div class="p-3 bg-light rounded mb-2">
+                                                               <h6 class="text-primary mb-2">Expérience</h6>
+                                                               <p class="mb-1"><strong>Entreprise :</strong> ${exp.company}</p>
+                                                               <p class="mb-0"><strong>Durée :</strong> ${exp.duree}</p>
+                                                           </div>
+                                                       `
+                                                   });
+                            `
+        </div>                   
+        ` 
+        document.getElementById('detais-worker').innerHTML = html;
 }
 
 
 
 
 
-
-
-
-
-
-
-
-
+   
 
 
 ///////////////////////////////////////////////////////

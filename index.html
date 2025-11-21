@@ -63,57 +63,32 @@
     <div class="container-fluid mt-5">
         <div class="row">
             <!-- <div class="col-1"></div> -->
-            <div class="col-xl-3  col-sm-12 border border-primary d-flex flex-column vh-100 content-div">
+            <div class="col-md-12 col-xl-3  border border-primary d-flex flex-column vh-100 content-div">
                 <h6 class="mt-1">les employees(non assigne)</h6>
                 <div class="col-12 mt-5">
-
                     <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">ajouter
                         noveau emplyee</button>
                 </div>
-
                 <div id="card-employer">
                     <!-- ici les noveaux emplyers  -->
 
                 </div>
-
-
-                
-
-
-
             </div>
 
 
 
 
-            <div class="col-xl-9 col-sm-12 d-flex flex-column justify-content-around  border vh-100 content-div-services">
-                <div class="row card-role d-flex flex-row justify-content-around">
+            <div
+                class="col-md-12 col-xl-9  col-d-flex flex-column justify-content-around  border vh-100 content-div-services">
+                <div class="row card-role d-flex flex-row sm-d-flex-column justify-content-around">
 
                     <div id="salleReception"
-                        class="col-xl-3 col-sm-1 h-sm-100 border border-danger d-flex flex-column card-list">
+                        class="col-xl-3 col-sm-12 h-sm-100 border border-danger d-flex flex-column card-list">
                         <h5 class="text-success roleName">Salle Réception</h5>
-
-
-                        <!---->
-
-
-                        <div class="card flex-row gap-2 h-25 w-100 card-item" id="card-reception">
-                            <!-- <div class="card-head">
-                                    <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
-                                </div>
-                                <div class="card-body p-0 d-flex flex-column justify-content-around">
-                                    <p>salah-eddine</p>
-                                    <span>developpeur</span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <button class="btn btn-link"><i class="bi bi-trash text-danger"></i></button>
-                                </div> -->
+                        <div class="card flex-column justify-content-between gap-2 h-25 w-75 card-item"
+                            id="card-reception">
+                            <!-- ici le code -->
                         </div>
-
-
-
-
-
                         <button class="btn btn-primary assigne" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">+</button>
 
@@ -122,15 +97,26 @@
                     <div id="salleServeurs" class="col-xl-3 col-sm-1 h-sm-100 border border-danger">
                         <h5 class="text-success roleName">Salle serveurs</h5>
 
+                        <div class="card flex-column justify-content-between gap-2 h-25 w-75 card-item"
+                            id="card-serveurs">
+
+
+                        </div>
+
                         <div class="card-liste-serveurs">
                             <!---->
 
                         </div>
-                        <button class="btn btn-primary assigne" data-bs-toggle="modal"
+                        <button class="btn btn-primary btn-sm assigne" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">+</button>
                     </div>
                     <div class="col-xl-3 col-sm-1 h-sm-100  border border-danger">
                         <h5 class="text-success roleName">Salle Sécurité</h5>
+                        <div class="card flex-column justify-content-between gap-2 h-25 w-75 card-item"
+                            id="card-securite">
+                            <!-- ici -->
+
+                        </div>
 
                         <button class="btn btn-primary assigne" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">+</button>
@@ -142,24 +128,23 @@
 
                     <div id="salleStaff" class="col-xl-3 col-sm-1 h-sm-100  border border-danger">
                         <h5 class="text-success roleName">Salle Conference</h5>
+                        <div class="card flex-column justify-content-between gap-2 h-25 w-75 card-item"
+                            id="card-conference">
+                            <!-- ici -->
+
+                        </div>
                         <button class="btn btn-primary assigne" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">+</button>
                     </div>
 
                     <div class="col-xl-3 col-sm-1 h-sm-100  border border-danger">
                         <h5 class="text-success roleName">staff Rom</h5>
-                        <div class="card flex-row gap-2 h-25 w-100">
-                            <div class="card-head">
-                                <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
-                            </div>
-                            <div class="card-body p-0 d-flex flex-column justify-content-around">
-                                <p>salah-eddine</p>
-                                <span>developpeur</span>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <button class="btn btn-link-success "><i class="bi bi-pencil"></i></button>
-                            </div>
+                        <div class="card flex-column justify-content-between gap-2 h-25 w-75 card-item"
+                            id="card-staffRome">
+                            <!-- ici -->
+
                         </div>
+
                         <button class="btn btn-primary assigne" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">+</button>
 
@@ -167,6 +152,11 @@
                     </div>
                     <div class="col-xl-3 col-sm-1 h-sm-100   border border-danger">
                         <h5 class="text text-success">Salle Archiver</h5>
+                        <div class="card flex-column justify-content-between gap-2 h-25 w-75 card-item"
+                            id="card-archiver">
+                            <!-- ici -->
+
+                        </div>
                         <button class="btn btn-primary assigne" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">+</button>
                     </div>
@@ -252,6 +242,35 @@
                     </div>
                 </div>
             </div>
+
+
+
+            <!-- Modale pour l'afficahge de profile de chaque emplyoer -->
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="btnmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-success" id="staticBackdropLabel">Profile</h5>
+                        </div>
+                        <div class="modal-body" id="detais-worker">
+                          
+                            
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" data-bs-dismiss="modal">Retour</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
 
 
 
