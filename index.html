@@ -20,42 +20,6 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Staff Manager</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
             </div>
         </nav>
     </head>
@@ -82,8 +46,7 @@
                 class="col-md-12 col-xl-9  col-d-flex flex-column justify-content-around  border vh-100 content-div-services">
                 <div class="row card-role d-flex flex-row sm-d-flex-column justify-content-around">
 
-                    <div id="salleReception"
-                        class="col-xl-3 col-sm-12 h-sm-100 border border-danger d-flex flex-column card-list">
+                    <div id="salleReception" data-name="Salle Réception" class="col-xl-3 col-sm-12 h-sm-100 border border-danger  d-flex flex-column card-list">
                         <h5 class="text-success roleName">Salle Réception</h5>
                         <div class="card flex-column justify-content-between gap-2 h-25 w-75 card-item"
                             id="card-reception">
@@ -97,9 +60,8 @@
                     <div id="salleServeurs" class="col-xl-3 col-sm-1 h-sm-100 border border-danger">
                         <h5 class="text-success roleName">Salle serveurs</h5>
 
-                        <div class="card flex-column justify-content-between gap-2 h-25 w-75 card-item"
-                            id="card-serveurs">
-
+                        <div class="card flex-column justify-content-between gap-2 h-25 w-75 card-item" id="card-serveurs">
+                            <!-- ici le code  -->
 
                         </div>
 
@@ -128,8 +90,7 @@
 
                     <div id="salleStaff" class="col-xl-3 col-sm-1 h-sm-100  border border-danger">
                         <h5 class="text-success roleName">Salle Conference</h5>
-                        <div class="card flex-column justify-content-between gap-2 h-25 w-75 card-item"
-                            id="card-conference">
+                        <div class="card flex-column justify-content-between gap-2 h-25 w-75 card-item" id="card-conference">
                             <!-- ici -->
 
                         </div>
@@ -139,14 +100,12 @@
 
                     <div class="col-xl-3 col-sm-1 h-sm-100  border border-danger">
                         <h5 class="text-success roleName">staff Rom</h5>
-                        <div class="card flex-column justify-content-between gap-2 h-25 w-75 card-item"
-                            id="card-staffRome">
+                        <div class="card flex-column justify-content-between gap-2 h-25 w-75 card-item" id="card-staffRome">
                             <!-- ici -->
 
                         </div>
 
-                        <button class="btn btn-primary assigne" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">+</button>
+                        <button class="btn btn-primary assigne" data-bs-toggle="modal"data-bs-target="#staticBackdrop">+</button>
 
 
                     </div>

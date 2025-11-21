@@ -1,5 +1,6 @@
-count = 0;
+
 let employers = [];
+let count = 0;
 
 window.addEventListener('load', () => {
     employers = JSON.parse(localStorage.getItem('worker')) || [];
@@ -98,6 +99,8 @@ function ValidationDataNoveauEmplyee() {
 
         } else {
             alert("les champs n'est pas valide !");
+            form.querySelectorAll('input').forEach(i => i.style.border = 'danger');
+            return;
         }
 
         AjouterNoveauEmployer(newEmplyer);
@@ -113,6 +116,7 @@ function AjouterNoveauEmployer(newEmplyer) {
      AfficcherEmplyeesNonAssigne()
 
 }
+
 
 ValidationDataNoveauEmplyee()
 
@@ -150,6 +154,7 @@ document.querySelectorAll(".assigne").forEach(btn => {
         let parent = btn.parentElement
         let nameZone = parent.querySelector('.roleName').textContent;
         ListesEmployees(nameZone);
+        AddWorkertoSalle(nameZone);
 
 
     })
@@ -157,7 +162,6 @@ document.querySelectorAll(".assigne").forEach(btn => {
 
 // fonction qui lister les emplyer non assigne pour le assigne a une salles 
 function ListesEmployees(nameZone) {
-
     let listEmplyees = '';
 
     document.getElementById('modal-body').innerHTML = "";
@@ -325,7 +329,7 @@ function AffichageEmployesReception() {
 function  AffichageEmployesServeurs() {
     let carReception = '';
 
-    for (receptioniste of salleReceptions) {
+    for (receptioniste of salleServeurs) {
         carReception += `
                     <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
                          <div class="col-3 card-head">
@@ -340,7 +344,8 @@ function  AffichageEmployesServeurs() {
                     </div>
                    
         `
-        document.getElementById("card-serveurs").innerHTML = carReception;
+        document.getElementById("card-serveurs").innerHTML += carReception;
+        console.log(document.getElementById("card-serveurs"));
     }
 
 
@@ -349,7 +354,7 @@ function  AffichageEmployesServeurs() {
 function AffichageEmployesSecurites(){
      let carReception = '';
 
-    for (receptioniste of salleReceptions) {
+    for (receptioniste of salleSecurites) {
         carReception += `
                     <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
                          <div class="col-3 card-head">
@@ -373,7 +378,7 @@ function AffichageEmployesSecurites(){
 function AfficherEmployesConferences(){
   let carReception = '';
 
-    for (receptioniste of salleReceptions) {
+    for (receptioniste of salleConferences) {
         carReception += `
                     <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
                          <div class="col-3 card-head">
@@ -397,7 +402,7 @@ function AfficherEmployesConferences(){
 function AfficherEmplyoesStaffRom(){
       let carReception = '';
 
-    for (receptioniste of salleReceptions) {
+    for (receptioniste of sallestaffRoms) {
         carReception += `
                     <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
                          <div class="col-3 card-head">
@@ -422,46 +427,68 @@ function AfficherEmplyoesStaffRom(){
 
 AffichageEmployesServeurs()
 AffichageEmployesReception()
+AfficherEmployesConferences()
+AfficherEmplyoesStaffRom()
 
 
 
 
 // lorsque click sur un card est retouner id de son parent
-document.getElementById('modal-body').addEventListener("click", (e)=> {
-    const card = e.target.closest('.card-workers');
-    const IdWorker = card.dataset.id
-    console.log(IdWorker);
-    AddWorkertoSalle(IdWorker);
+// document.getElementById('modal-body').addEventListener("click", (e)=> {
+//     const card = e.target.closest('.card-workers');
+//     const IdWorker = card.dataset.id;
     
-})
+//     document.querySelectorAll(".assigne").forEach(btn => {
+//     btn.addEventListener("click", () => {
+//         let parent = btn.parentElement
+//         let nameZone = parent.querySelector('.roleName').textContent;
+//         console.log("name zone"+ nameZone)
+//         AddWorkertoSalle(IdWorker, nameZone);
+        
 
-function AddWorkertoSalle(IdWorker){
+
+//     })
+// })
+    
+// })
+
+function AddWorkertoSalle(nameZone){
+    let IdWorker;
+    let modal = document.getElementById('modal-body')
+    modal.addEventListener("click", ()=> {
+    const card = modal.querySelector('.card-workers');
+     IdWorker = card.dataset.id;
+
+    // console.log("cette ", nameZone)
+    // console.log(IdWorker);
 
     const worker = employers.find(employer => employer.id == IdWorker)
-    console.log(worker.role)
-    console.log(worker)
-
-    let assinged = false
+ 
 
 
-    if(['reception', 'manager', 'reception', 'nettoyage'].includes(worker.role)){
+    if(['reception', 'manager', 'nettoyage'].includes(worker.role) && (nameZone.trim() == 'Salle Réception')){
         salleReceptions.push(worker);
         AffichageEmployesReception();
         console.log(1);
-        employers.splice(employers.findIndex(e=>e.id == IdWorker), 1);
+
+        employers.splice(employers.findIndex(e => e.id == IdWorker), 1);
         AfficcherEmplyeesNonAssigne();
         return 
     }
-    if(['securite', 'manager', 'nettoyage'].includes(worker.role)){
+    if(['Techniciens IT', 'manager', 'nettoyage'].includes(worker.role) && (nameZone.trim() == 'Salle serveurs')){
         salleServeurs.push(worker);
         AffichageEmployesServeurs();
+        console.log('serverus', salleServeurs);
         console.log(2);
-        employers.splice(employers.findIndex(e=>e.id == IdWorker), 1);
+        employers.splice(employers.findIndex(e => e.id == IdWorker), 1);
         AfficcherEmplyeesNonAssigne();
         return 
     
     }
-     if(['Techniciens IT', 'manager', 'nettoyage'].includes(worker.role)){
+     if(['Securite', 'manager', 'nettoyage'].includes(worker.role) && (nameZone.trim() == 'Salle Sécurité')){
+
+        console.log(nameZone);
+        
         salleSecurites.push(worker);
         AffichageEmployesSecurites();
         console.log(3);
@@ -470,7 +497,8 @@ function AddWorkertoSalle(IdWorker){
         return 
         
     }
-    if(['manager', 'securite', 'nettoyage','Techniciens IT']){
+    if(['manager', 'Securite', 'nettoyage','Techniciens IT'].includes(worker.role) && (nameZone.trim() == 'Salle Conference')){
+        console.log(nameZone);
         salleConferences.push(worker);
         AfficherEmployesConferences();
         console.log(5)
@@ -478,14 +506,16 @@ function AddWorkertoSalle(IdWorker){
         AfficcherEmplyeesNonAssigne();
         return 
     }
-    if(['manager', 'securite', 'nettoyage','Techniciens IT']){
+    if(['manager', 'nettoyage','Techniciens IT'].includes(worker.role) && (nameZone.trim() == 'staff Rom')){
+        console.log(nameZone);
         sallestaffRoms.push(worker);
         AfficherEmplyoesStaffRom();
         employers.splice(employers.findIndex(e=>e.id == IdWorker), 1);
         AfficcherEmplyeesNonAssigne();
         return 
     }
-    if(['manager'].includes(worker.role)){
+    if(['manager'].includes(worker.role) && (nameZone.trim() == 'Salle Archiver')){
+        console.log(nameZone);
         salleArchivers.push(worker);
         AfficherEmplyoesArchivers();
         console.log(4);
@@ -495,6 +525,9 @@ function AddWorkertoSalle(IdWorker){
         return 
        
     }    
+     
+})
+
 }
 
 
