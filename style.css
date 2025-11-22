@@ -1,32 +1,66 @@
 .content-div{
-    height: 90vh !important;
+    height: 100vh !important;
 
 }
-.role-text{
-    color: rgb(157, 159, 161);
-    font-size: small;
-}
+
 
 .content-div-services .card-role{
-    height: 40%;
+    height: 45%;
+    width: 100%;
+    /* background-color: rgb(210, 210, 210); */
 }
 
-.card-content {
-    margin-top: 1px;
-    width: 80%;
-    height: 16%;
-    display: flex;
-    border: 1px solid black;
-    justify-content: space-around;
+.content-div-services .card-role .card-zone{
+    background-color: #c8e1f0;
+    width: 30%;
+    border-radius: 20px;
+    border: 2px solid  rgb(94, 222, 245) !important;
+}
+.card-item {
+    width: auto;
+    height: 200px;
+    background-color: #c8e1f0;
+    border: none;
+   
 }
 
-.card-body span{
-    font-size: 12px;
-    color: rgb(90, 91, 92);
+
+.card-item .card-employees{ 
+  background-color: rgb(149, 183, 231) !important;
+  height: 20% !important;
+  width: 100% !important;
+  border-radius: 10px;
+
 }
 
-/* .card-list button{
-    width: 15%;
-    padding: 2px;
-    height: 10%;
-} */
+.card-item .card-employees .card-head{
+ 
+    height: 100% !important;
+}
+.card-item .card-employees .card-head img{
+    width: 100% !important;
+    height: 100% !important;
+}
+.card-item .card-employees .card-body{
+    width: 90%;
+    height: 50%;
+   
+}
+.card-item .card-employees .card-body p{
+    margin-top: -6px;
+    align-items: center;
+    font-size: 13px;   
+}
+.assigne{
+    background-color: rgb(92, 181, 92);
+    border-radius: 5px;
+    border: 1px solid white;
+    transition: 0.9s;
+   
+}
+.assigne:hover{
+   background: green;
+   color: white;
+}
+
+

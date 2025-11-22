@@ -2,9 +2,31 @@
 let employers = [];
 let count = 0;
 
+
+// la recupeartion des donner de puis localstorage lorsque le refrecge de la page 
 window.addEventListener('load', () => {
     employers = JSON.parse(localStorage.getItem('worker')) || [];
     AfficcherEmplyeesNonAssigne();
+
+    salleReceptions = JSON.parse(localStorage.getItem('receptions')) || [];
+    AffichageEmployesReception()
+
+    salleServeurs = JSON.parse(localStorage.getItem('serveurs')) || [];
+    AffichageEmployesServeurs();
+
+    salleSecurites =  JSON.parse(localStorage.getItem('securites')) || [];
+    AffichageEmployesSecurites()
+
+    salleConferences = JSON.parse(localStorage.getItem('confreneces')) || [];
+    AfficherEmployesConferences();
+
+    sallestaffRoms = JSON.parse(localStorage.getItem('sattff')) || [];
+    AfficherEmplyoesStaffRom()
+
+    salleArchivers = JSON.parse(localStorage.getItem('archivers')) || [];
+    AfficherEmplyersArchivers();
+
+
 })
 
 
@@ -18,15 +40,60 @@ let salleReceptions = [
         tele: "+212 623232",
         photo: 'profile.png',
         localisation: "youssoufia/Rue01",
-        expreiences: [{company: "companyX", duree: "1 mois"}]
+        expreiences: [{ company: "companyX", duree: "1 mois" }]
+    },
+    {
+        id: count,
+        name: "salah-eddine",
+        email: "salah@gmail.com",
+        role: "reception",
+        tele: "+212 623232",
+        photo: 'profile.png',
+        localisation: "youssoufia/Rue01",
+        expreiences: [{ company: "companyX", duree: "1 mois" }]
+    },
+    {
+        id: count,
+        name: "salah-eddine",
+        email: "salah@gmail.com",
+        role: "reception",
+        tele: "+212 623232",
+        photo: 'profile.png',
+        localisation: "youssoufia/Rue01",
+        expreiences: [{ company: "companyX", duree: "1 mois" }]
     }
 ]
 
 let salleServeurs = []
-let salleSecurites = []
-let sallestaffRoms = []
-let salleArchivers = []
+
+let salleSecurites = [
+     {
+        id: count,
+        name: "salah-eddine",
+        email: "salah@gmail.com",
+        role: "securite",
+        tele: "+212 623232",
+        photo: 'profile.png',
+        localisation: "youssoufia/Rue01",
+        expreiences: [{ company: "companyX", duree: "1 mois" }]
+    }
+]
+
+let sallestaffRoms = [
+      {
+        id: count,
+        name: "salah-eddine",
+        email: "salah@gmail.com",
+        role: "technicienne IT",
+        tele: "+212 623232",
+        photo: 'profile.png',
+        localisation: "youssoufia/Rue01",
+        expreiences: [{ company: "companyX", duree: "1 mois" }]
+    },
+]
 let salleConferences = []
+let salleArchivers = []
+
 
 
 
@@ -92,14 +159,16 @@ function ValidationDataNoveauEmplyee() {
                 role: role,
                 tele: tele,
                 localisation: localisation,
-                expreiences: [{company: company, duree: duree}]
-                
+                expreiences: [{ company: company, duree: duree }]
+
             }
 
 
         } else {
             alert("les champs n'est pas valide !");
-            form.querySelectorAll('input').forEach(i => i.style.border = 'danger');
+            form.querySelectorAll('input').forEach(i => {
+                i.style.border = '1px solid red';
+            });
             return;
         }
 
@@ -113,7 +182,7 @@ function ValidationDataNoveauEmplyee() {
 function AjouterNoveauEmployer(newEmplyer) {
     employers.push(newEmplyer);
     localStorage.setItem('worker', JSON.stringify(employers));
-     AfficcherEmplyeesNonAssigne()
+    AfficcherEmplyeesNonAssigne()
 
 }
 
@@ -126,7 +195,7 @@ function AfficcherEmplyeesNonAssigne() {
 
     employers.forEach(employer => {
 
-         cardEmplyees += `
+        cardEmplyees += `
                 <div class="row card mt-2 d-flex flex-row">
                     <div class="card-head mt-3 col-3">
                         <img class="w-100 h-50 rounded-circle" src="profile.png" alt="">
@@ -142,7 +211,7 @@ function AfficcherEmplyeesNonAssigne() {
                 </div>
         `
     })
-     document.getElementById('card-employer').innerHTML = cardEmplyees;
+    document.getElementById('card-employer').innerHTML = cardEmplyees;
 }
 
 
@@ -160,7 +229,7 @@ document.querySelectorAll(".assigne").forEach(btn => {
     })
 })
 
-// fonction qui lister les emplyer non assigne pour le assigne a une salles 
+// fonction qui lister les emplyer non assigne pour assigne le a une salles 
 function ListesEmployees(nameZone) {
     let listEmplyees = '';
 
@@ -173,7 +242,7 @@ function ListesEmployees(nameZone) {
             || (nameZone == 'Salle Réception' && employer.role == 'nettoyage')) {
 
 
-        
+
             listEmplyees += `
             <div class="card flex-row gap-2 h-25 w-100 card-workers" data-id=${employer.id}>
                             <div class="card-head">
@@ -307,14 +376,14 @@ function AffichageEmployesReception() {
         carReception += `
                     <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
                          <div class="col-3 card-head">
-                                <img class="w-100 h-50 rounded-circle mt-2" src="profile.png" alt="">
+                                <img class="w-75 h-25 rounded-circle mt-0" src="profile.png" alt="">
                         </div>
-                        <div class="col-4 card-body p-0 d-flex flex-column justify-content-around">
+                        <div class="col-5 card-body  justify-content-around">
                             <p>${receptioniste.name}</p>
                         </div>
-                      <div class="col-3 d-flex align-items-center">
-                        <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
-                    </div>
+                        <div class="col-2 fs-6">
+                           <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                        </div>
                     </div>
                    
         `
@@ -326,46 +395,47 @@ function AffichageEmployesReception() {
 }
 
 
-function  AffichageEmployesServeurs() {
+function AffichageEmployesServeurs() {
+    console.log('affiche serveru 1');
+    document.getElementById("card-serveurs").innerHTML = '';
     let carReception = '';
 
     for (receptioniste of salleServeurs) {
         carReception += `
-                    <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
+                     <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
                          <div class="col-3 card-head">
-                                <img class="w-100 h-50 rounded-circle mt-2" src="profile.png" alt="">
+                                <img class="w-75 h-75 rounded-circle mt-0" src="profile.png" alt="">
                         </div>
-                        <div class="col-4 card-body p-0 d-flex flex-column justify-content-around">
+                        <div class="col-5 card-body  justify-content-around">
                             <p>${receptioniste.name}</p>
                         </div>
-                      <div class="col-3 d-flex align-items-center">
-                        <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
-                    </div>
+                        <div class="col-2 fs-6">
+                           <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                        </div>
                     </div>
                    
         `
         document.getElementById("card-serveurs").innerHTML += carReception;
-        console.log(document.getElementById("card-serveurs"));
     }
 
 
 }
 
-function AffichageEmployesSecurites(){
-     let carReception = '';
+function AffichageEmployesSecurites() {
+    let carReception = '';
 
     for (receptioniste of salleSecurites) {
         carReception += `
                     <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
                          <div class="col-3 card-head">
-                                <img class="w-100 h-50 rounded-circle mt-2" src="profile.png" alt="">
+                                <img class="w-75 h-25 rounded-circle mt-0" src="profile.png" alt="">
                         </div>
-                        <div class="col-4 card-body p-0 d-flex flex-column justify-content-around">
+                        <div class="col-5 card-body  justify-content-around">
                             <p>${receptioniste.name}</p>
                         </div>
-                      <div class="col-3 d-flex align-items-center">
-                        <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
-                    </div>
+                        <div class="col-2 fs-6">
+                           <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                        </div>
                     </div>
                    
         `
@@ -375,21 +445,21 @@ function AffichageEmployesSecurites(){
 
 }
 
-function AfficherEmployesConferences(){
-  let carReception = '';
+function AfficherEmployesConferences() {
+    let carReception = '';
 
     for (receptioniste of salleConferences) {
         carReception += `
                     <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
                          <div class="col-3 card-head">
-                                <img class="w-100 h-50 rounded-circle mt-2" src="profile.png" alt="">
+                                <img class="w-75 h-25 rounded-circle mt-0" src="profile.png" alt="">
                         </div>
-                        <div class="col-4 card-body p-0 d-flex flex-column justify-content-around">
+                        <div class="col-5 card-body  justify-content-around">
                             <p>${receptioniste.name}</p>
                         </div>
-                      <div class="col-3 d-flex align-items-center">
-                        <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
-                    </div>
+                        <div class="col-2 fs-6">
+                           <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                        </div>
                     </div>
                    
         `
@@ -399,21 +469,44 @@ function AfficherEmployesConferences(){
 
 }
 
-function AfficherEmplyoesStaffRom(){
-      let carReception = '';
+function AfficherEmplyoesStaffRom() {
+    let carReception = '';
 
     for (receptioniste of sallestaffRoms) {
         carReception += `
-                    <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
+                     <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
                          <div class="col-3 card-head">
-                                <img class="w-100 h-50 rounded-circle mt-2" src="profile.png" alt="">
+                                <img class="w-75 h-25 rounded-circle mt-0" src="profile.png" alt="">
                         </div>
-                        <div class="col-4 card-body p-0 d-flex flex-column justify-content-around">
+                        <div class="col-5 card-body  justify-content-around">
                             <p>${receptioniste.name}</p>
                         </div>
-                      <div class="col-3 d-flex align-items-center">
-                        <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                        <div class="col-2 fs-6">
+                           <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                        </div>
                     </div>
+                   
+        `
+        document.getElementById("card-staffRome").innerHTML = carReception;
+
+    }
+}
+
+function AfficherEmplyersArchivers() {
+     let carReception = '';
+
+    for (receptioniste of salleArchivers) {
+        carReception += `
+                     <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
+                         <div class="col-3 card-head">
+                                <img class="w-75 h-25 rounded-circle mt-0" src="profile.png" alt="">
+                        </div>
+                        <div class="col-5 card-body  justify-content-around">
+                            <p>${receptioniste.name}</p>
+                        </div>
+                        <div class="col-2 fs-6">
+                           <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                        </div>
                     </div>
                    
         `
@@ -425,110 +518,146 @@ function AfficherEmplyoesStaffRom(){
 
 
 
-AffichageEmployesServeurs()
-AffichageEmployesReception()
-AfficherEmployesConferences()
-AfficherEmplyoesStaffRom()
+
+
+
+// AffichageEmployesReception();
+// AffichageEmployesServeurs();
+// AffichageEmployesSecurites()
+// AfficherEmplyoesStaffRom()
+// AfficherEmplyersArchivers()
 
 
 
 
-// lorsque click sur un card est retouner id de son parent
-// document.getElementById('modal-body').addEventListener("click", (e)=> {
-//     const card = e.target.closest('.card-workers');
-//     const IdWorker = card.dataset.id;
-    
-//     document.querySelectorAll(".assigne").forEach(btn => {
-//     btn.addEventListener("click", () => {
-//         let parent = btn.parentElement
-//         let nameZone = parent.querySelector('.roleName').textContent;
-//         console.log("name zone"+ nameZone)
-//         AddWorkertoSalle(IdWorker, nameZone);
-        
 
+// Exemple corrigé : ajout d'un worker à une salle via clique sur une .card-workers dans le modal
+function AddWorkertoSalle(nameZone) {
+  const modal = document.getElementById('modal-body');
 
-//     })
-// })
-    
-// })
-
-function AddWorkertoSalle(nameZone){
-    let IdWorker;
-    let modal = document.getElementById('modal-body')
-    modal.addEventListener("click", ()=> {
-    const card = modal.querySelector('.card-workers');
-     IdWorker = card.dataset.id;
-
-    // console.log("cette ", nameZone)
-    // console.log(IdWorker);
-
-    const worker = employers.find(employer => employer.id == IdWorker)
  
-
-
-    if(['reception', 'manager', 'nettoyage'].includes(worker.role) && (nameZone.trim() == 'Salle Réception')){
-        salleReceptions.push(worker);
-        AffichageEmployesReception();
-        console.log(1);
-
-        employers.splice(employers.findIndex(e => e.id == IdWorker), 1);
-        AfficcherEmplyeesNonAssigne();
-        return 
+  const handler = (e) => {
+    const card = e.target.closest('.card-workers');
+    if (!card) {
+        alert('tu est clikc hor de la cart')
+        return;
     }
-    if(['Techniciens IT', 'manager', 'nettoyage'].includes(worker.role) && (nameZone.trim() == 'Salle serveurs')){
-        salleServeurs.push(worker);
-        AffichageEmployesServeurs();
-        console.log('serverus', salleServeurs);
-        console.log(2);
-        employers.splice(employers.findIndex(e => e.id == IdWorker), 1);
-        AfficcherEmplyeesNonAssigne();
-        return 
+
+    const IdWorker = card.dataset.id;
+    const worker = employers.find(emp => emp.id == IdWorker);
+  
+    if (!worker) {
+      alert("Employé introuvable.");
+      return;
+    }
+
     
-    }
-     if(['Securite', 'manager', 'nettoyage'].includes(worker.role) && (nameZone.trim() == 'Salle Sécurité')){
 
-        console.log(nameZone);
-        
-        salleSecurites.push(worker);
-        AffichageEmployesSecurites();
-        console.log(3);
-         employers.splice(employers.findIndex(e=>e.id == IdWorker), 1);
-         AfficcherEmplyeesNonAssigne();
-        return 
-        
-    }
-    if(['manager', 'Securite', 'nettoyage','Techniciens IT'].includes(worker.role) && (nameZone.trim() == 'Salle Conference')){
-        console.log(nameZone);
-        salleConferences.push(worker);
-        AfficherEmployesConferences();
-        console.log(5)
-        employers.splice(employers.findIndex(e=>e.id == IdWorker), 1);
-        AfficcherEmplyeesNonAssigne();
-        return 
-    }
-    if(['manager', 'nettoyage','Techniciens IT'].includes(worker.role) && (nameZone.trim() == 'staff Rom')){
-        console.log(nameZone);
-        sallestaffRoms.push(worker);
-        AfficherEmplyoesStaffRom();
-        employers.splice(employers.findIndex(e=>e.id == IdWorker), 1);
-        AfficcherEmplyeesNonAssigne();
-        return 
-    }
-    if(['manager'].includes(worker.role) && (nameZone.trim() == 'Salle Archiver')){
-        console.log(nameZone);
-        salleArchivers.push(worker);
-        AfficherEmplyoesArchivers();
-        console.log(4);
-        
-        employers.splice(employers.findIndex(e=>e.id == IdWorker), 1)
-        AfficcherEmplyeesNonAssigne();
-        return 
-       
-    }    
-     
-})
+    //fonction pour supprimer le emplyer depuis la list est refrecher la liste 
+    const removeFromPool = (id) => {
+      const idx = employers.findIndex(e => e.id == id);
+      if (idx !== -1) employers.splice(idx, 1);
+      AfficcherEmplyeesNonAssigne();
+    };
 
+    // On fait la verification par zone premierment 
+
+    if (nameZone.trim() === 'Salle Réception') {
+      if (!['reception', 'manager', 'nettoyage'].includes(worker.role)) {
+        alert("Rôle non autorisé pour cette salle.");
+        return;
+      }
+      if (salleReceptions.length >= 4) { 
+        alert("cette zone est remplie");
+        return;
+      }
+      salleReceptions.push(worker);
+      AffichageEmployesReception();
+      localStorage.setItem('receptions', JSON.stringify(salleReceptions));
+      removeFromPool(IdWorker);
+      localStorage.setItem('worker', JSON.stringify(employers));
+      return;
+    }
+
+    if (nameZone.trim() === 'Salle serveurs') {
+      if (!['Techniciens IT', 'manager', 'nettoyage'].includes(worker.role)) {
+        alert("Rôle non autorisé pour cette salle.");
+        return;
+      }
+      if (salleServeurs.length >= 3) { // CORRECTION : vérifier salleServeurs
+        alert("la salle est remplie");
+        return;
+      }
+      salleServeurs.push(worker);
+      AffichageEmployesServeurs();
+      localStorage.setItem('serveurs', JSON.stringify(salleServeurs));
+      removeFromPool(IdWorker);
+      localStorage.setItem('worker', JSON.stringify(employers));
+      return;
+    }
+
+    if (nameZone.trim() === 'Salle Sécurité') {
+      if (!['Securite', 'manager', 'nettoyage'].includes(worker.role)) {
+        alert("Rôle non autorisé pour cette salle.");
+        return;
+      }
+      if (salleSecurites.length >= 3) {
+        alert("la salle est remplie");
+        return;
+      }
+      salleSecurites.push(worker);
+      localStorage.setItem('securites', JSON.stringify(salleSecurites));
+      AffichageEmployesSecurites();
+      removeFromPool(IdWorker);
+      localStorage.setItem('worker', JSON.stringify(employers));
+      return;
+    }
+
+    if (nameZone.trim() === 'Salle Conference') {
+      if (!['manager', 'Securite', 'nettoyage', 'Techniciens IT'].includes(worker.role)) {
+        alert("Rôle non autorisé pour cette salle.");
+        return;
+      }
+      salleConferences.push(worker);
+      localStorage.setItem('confreneces', JSON.parse(salleConferences));
+      AfficherEmployesConferences();
+      removeFromPool(IdWorker);
+      localStorage.setItem('worker', JSON.stringify(employers));
+      return;
+    }
+
+    if (nameZone.trim() === 'staff Rom') {
+      if (!['manager', 'nettoyage', 'Techniciens IT'].includes(worker.role)) {
+        alert("Rôle non autorisé pour cette salle.");
+        return;
+      }
+      sallestaffRoms.push(worker);
+      localStorage.setItem('sattff', JSON.parse(sallestaffRoms));
+      AfficherEmplyoesStaffRom();
+      removeFromPool(IdWorker);
+      localStorage.setItem('worker', JSON.stringify(employers));
+      return;
+    }
+
+    if (nameZone.trim() === 'Salle Archiver') {
+      if (!['manager'].includes(worker.role)) {
+        alert("Rôle non autorisé pour cette salle.");
+        return;
+      }
+      salleArchivers.push(worker);
+      AfficherEmplyersArchivers();
+      localStorage.setItem('archivers', JSON.parse(salleArchivers));
+      removeFromPool(IdWorker);
+      localStorage.setItem('worker', JSON.stringify(employers));
+      return;
+    }
+  };
+
+  // on attache le listener avec once:true pour s'assurer qu'il s'exécute une seule fois
+  modal.addEventListener('click', handler, { once: true });
+//   modal.addEventListener('click', handler);
 }
+
 
 
 
@@ -544,26 +673,26 @@ document.addEventListener("click", (e) => {
     }
 });
 
-function AfficherDetailsProfile(id){
-    
-    let html  = "";
+function AfficherDetailsProfile(id) {
+
+    let html = "";
     document.getElementById('detais-worker').innerHTML = " ";
 
     // recupere emplyer par id a parties la listed des emplyes 
     let emplyoer = employers.find(emp => emp.id == id);
 
-   
 
-    if(!emplyoer){
+
+    if (!emplyoer) {
         alert("Non emplyoyer trouvee !");
         return;
     }
-    
 
 
 
 
-        html = `
+
+    html = `
             <div class="d-flex align-items-center mb-3">
                                 <img src="profile.png" alt="photo" class="rounded-circle me-3" width="100" height="100">
 
@@ -583,33 +712,33 @@ function AfficherDetailsProfile(id){
                             </p>
                             
                            `
-                            emplyoer.expreiences.forEach(exp => {
-                                                       html +=` 
+            emplyoer.expreiences.forEach(exp => {
+            html += ` 
                                                            <div class="p-3 bg-light rounded mb-2">
                                                                <h6 class="text-primary mb-2">Expérience</h6>
                                                                <p class="mb-1"><strong>Entreprise :</strong> ${exp.company}</p>
                                                                <p class="mb-0"><strong>Durée :</strong> ${exp.duree}</p>
                                                            </div>
                                                        `
-                                                   });
-                            `
+    });
+    `
         </div>                   
-        ` 
-        document.getElementById('detais-worker').innerHTML = html;
+        `
+    document.getElementById('detais-worker').innerHTML += html;
 }
 
 
 
 
 
-   
+
 
 
 ///////////////////////////////////////////////////////
 
-//on ajouter un evenement lorsque le click sur le card pour la liste des emplyes chauc'un pour ce role 
-// on recuepere l id est le role de card d'emplyer a clicke 
-// on chercher par l id d'emplyes selectionee dans la liste principale 
+//on ajouter un evenement lorsque le click sur le card pour la liste des emplyes chauc'un pour ce role
+// on recuepere l id est le role de card d'emplyer a clicke
+// on chercher par l id d'emplyes selectionee dans la liste principale
 // apres ajouter le card d'emplyee a selctionee dans le zone selon son role on ajouter dans la list zone []
 // apres supprimer l'employer dans le tableaux principale emplyoers 
 
