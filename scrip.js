@@ -31,66 +31,10 @@ window.addEventListener('load', () => {
 
 
 
-let salleReceptions = [
-    {
-        id: count,
-        name: "salah-eddine",
-        email: "salah@gmail.com",
-        role: "reception",
-        tele: "+212 623232",
-        photo: 'profile.png',
-        localisation: "youssoufia/Rue01",
-        expreiences: [{ company: "companyX", duree: "1 mois" }]
-    },
-    {
-        id: count,
-        name: "salah-eddine",
-        email: "salah@gmail.com",
-        role: "reception",
-        tele: "+212 623232",
-        photo: 'profile.png',
-        localisation: "youssoufia/Rue01",
-        expreiences: [{ company: "companyX", duree: "1 mois" }]
-    },
-    {
-        id: count,
-        name: "salah-eddine",
-        email: "salah@gmail.com",
-        role: "reception",
-        tele: "+212 623232",
-        photo: 'profile.png',
-        localisation: "youssoufia/Rue01",
-        expreiences: [{ company: "companyX", duree: "1 mois" }]
-    }
-]
-
+let salleReceptions = []
 let salleServeurs = []
-
-let salleSecurites = [
-     {
-        id: count,
-        name: "salah-eddine",
-        email: "salah@gmail.com",
-        role: "securite",
-        tele: "+212 623232",
-        photo: 'profile.png',
-        localisation: "youssoufia/Rue01",
-        expreiences: [{ company: "companyX", duree: "1 mois" }]
-    }
-]
-
-let sallestaffRoms = [
-      {
-        id: count,
-        name: "salah-eddine",
-        email: "salah@gmail.com",
-        role: "technicienne IT",
-        tele: "+212 623232",
-        photo: 'profile.png',
-        localisation: "youssoufia/Rue01",
-        expreiences: [{ company: "companyX", duree: "1 mois" }]
-    },
-]
+let salleSecurites = []
+let sallestaffRoms = []
 let salleConferences = []
 let salleArchivers = []
 
@@ -217,15 +161,14 @@ function AfficcherEmplyeesNonAssigne() {
 
 // lorsque le click sur une button pour ajouter emplyer est afficher la listes des emplyes
 
-
+//  le role de ce event c'est donner les nameZones des buttons clicke a 
 document.querySelectorAll(".assigne").forEach(btn => {
     btn.addEventListener("click", () => {
         let parent = btn.parentElement
         let nameZone = parent.querySelector('.roleName').textContent;
         ListesEmployees(nameZone);
         AddWorkertoSalle(nameZone);
-
-
+        RemoveWorkerToSall(nameZone);
     })
 })
 
@@ -369,6 +312,7 @@ function ListesEmployees(nameZone) {
 }
 
 
+
 function AffichageEmployesReception() {
     let carReception = '';
 
@@ -382,7 +326,7 @@ function AffichageEmployesReception() {
                             <p>${receptioniste.name}</p>
                         </div>
                         <div class="col-2 fs-6">
-                           <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                           <button class="btn btn-link supprimer" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
                         </div>
                     </div>
                    
@@ -410,7 +354,7 @@ function AffichageEmployesServeurs() {
                             <p>${receptioniste.name}</p>
                         </div>
                         <div class="col-2 fs-6">
-                           <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                           <button class="btn btn-link supprimer" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
                         </div>
                     </div>
                    
@@ -434,7 +378,7 @@ function AffichageEmployesSecurites() {
                             <p>${receptioniste.name}</p>
                         </div>
                         <div class="col-2 fs-6">
-                           <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                           <button class="btn btn-link supprimer" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
                         </div>
                     </div>
                    
@@ -458,7 +402,7 @@ function AfficherEmployesConferences() {
                             <p>${receptioniste.name}</p>
                         </div>
                         <div class="col-2 fs-6">
-                           <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                           <button class="btn btn-link supprimer" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
                         </div>
                     </div>
                    
@@ -482,7 +426,7 @@ function AfficherEmplyoesStaffRom() {
                             <p>${receptioniste.name}</p>
                         </div>
                         <div class="col-2 fs-6">
-                           <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                           <button class="btn btn-link supprimer" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
                         </div>
                     </div>
                    
@@ -505,7 +449,7 @@ function AfficherEmplyersArchivers() {
                             <p>${receptioniste.name}</p>
                         </div>
                         <div class="col-2 fs-6">
-                           <button class="btn btn-link" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
+                           <button class="btn btn-link supprimer" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
                         </div>
                     </div>
                    
@@ -521,11 +465,7 @@ function AfficherEmplyersArchivers() {
 
 
 
-// AffichageEmployesReception();
-// AffichageEmployesServeurs();
-// AffichageEmployesSecurites()
-// AfficherEmplyoesStaffRom()
-// AfficherEmplyersArchivers()
+
 
 
 
@@ -619,7 +559,7 @@ function AddWorkertoSalle(nameZone) {
         return;
       }
       salleConferences.push(worker);
-      localStorage.setItem('confreneces', JSON.parse(salleConferences));
+      localStorage.setItem('confreneces', JSON.stringify(salleConferences));
       AfficherEmployesConferences();
       removeFromPool(IdWorker);
       localStorage.setItem('worker', JSON.stringify(employers));
@@ -632,7 +572,7 @@ function AddWorkertoSalle(nameZone) {
         return;
       }
       sallestaffRoms.push(worker);
-      localStorage.setItem('sattff', JSON.parse(sallestaffRoms));
+      localStorage.setItem('sattff', JSON.stringify(sallestaffRoms));
       AfficherEmplyoesStaffRom();
       removeFromPool(IdWorker);
       localStorage.setItem('worker', JSON.stringify(employers));
@@ -646,7 +586,7 @@ function AddWorkertoSalle(nameZone) {
       }
       salleArchivers.push(worker);
       AfficherEmplyersArchivers();
-      localStorage.setItem('archivers', JSON.parse(salleArchivers));
+      localStorage.setItem('archivers', JSON.stringify(salleArchivers));
       removeFromPool(IdWorker);
       localStorage.setItem('worker', JSON.stringify(employers));
       return;
@@ -665,7 +605,6 @@ function AddWorkertoSalle(nameZone) {
 // on recupere l 'id de emplyer pour chaque click 
 
 document.addEventListener("click", (e) => {
-    console.log(employers);
     if (e.target.classList.contains("profile-btn")) {
         const id = e.target.getAttribute("id");
         console.log(id);
@@ -726,6 +665,104 @@ function AfficherDetailsProfile(id) {
         `
     document.getElementById('detais-worker').innerHTML += html;
 }
+
+
+// fonction pour supprimer un emplyer s'une salle est retourn dans la liste des mplyers non assigne 
+
+
+addEventListener('click', (e) => {
+
+    let btn = e.target.closest(".supprimer");
+    // le cas click sur une autre button 
+    if(!btn) return; 
+    let id = btn.id
+    let nameZone = btn.closest(".card-zone").querySelectorAll('.roleName')[0].textContent; 
+
+    RemoveWorkerToSall(id, nameZone);
+
+   
+    
+})
+// Salle Réception Salle serveurs  Salle Sécurité staff Rom
+
+function RemoveWorkerToSall(id, nameZone){
+
+    console.log(nameZone);
+    console.log(id);
+
+    
+
+    
+
+    if(nameZone == 'Salle Réception'){
+        const worker = salleReceptions.find(e => e.id == id)
+        AjouterNoveauEmployer(worker);
+    
+        localStorage.setItem('worker', JSON.stringify(employers));
+        AfficcherEmplyeesNonAssigne();
+        salleReceptions.splice(salleReceptions.findIndex(e => e.id == id), 1);
+        localStorage.setItem('receptions', JSON.stringify(salleReceptions));
+        AffichageEmployesReception(); 
+        return;
+    }
+
+     if(nameZone == 'Salle serveurs'){
+        const worker = salleServeurs.find(e => e.id == id)
+        employers.push(worker);
+        localStorage.setItem('worker', JSON.stringify(employers));
+        AfficcherEmplyeesNonAssigne();
+        salleServeurs.splice(salleServeurs.findIndex(e => e.id == id), 1);
+        localStorage.setItem('serveurs', JSON.stringify(salleServeurs));
+        AffichageEmployesServeurs(); 
+        return;
+    }
+
+     if(nameZone == 'Salle Sécurité'){
+        const worker = salleSecurites.find(e => e.id == id)
+        employers.push(worker);
+        localStorage.setItem('worker', JSON.stringify(employers));
+        AfficcherEmplyeesNonAssigne();
+        salleSecurites.splice(salleSecurites.findIndex(e => e.id == id), 1);
+        localStorage.setItem('securites', JSON.stringify(salleSecurites));
+        AffichageEmployesSecurites(); 
+        return;
+    }
+
+     if(nameZone == 'Salle Conference'){
+        const worker = salleConferences.find(e => e.id == id)
+        employers.push(worker);
+        localStorage.setItem('worker', JSON.stringify(employers));
+        AfficcherEmplyeesNonAssigne();
+        salleConferences.splice(salleConferences.findIndex(e => e.id == id), 1);
+        localStorage.setItem('confreneces', JSON.stringify(salleConferences));
+        AfficherEmployesConferences(); 
+        return;
+    }
+
+    if(nameZone == 'staff Rom'){
+        const worker = sallestaffRoms.find(e => e.id == id)
+        employers.push(worker);
+        localStorage.setItem('worker', JSON.stringify(employers));
+        AfficcherEmplyeesNonAssigne();
+        sallestaffRoms.splice(sallestaffRoms.findIndex(e => e.id == id), 1);
+        localStorage.setItem('sattff', JSON.stringify(sallestaffRoms));
+        AfficherEmplyoesStaffRom(); 
+        return;
+    }
+    if(nameZone == 'Salle Archiver'){
+        const worker = salleArchivers.find(e => e.id == id)
+        employers.push(worker);
+        localStorage.setItem('worker', JSON.stringify(employers));
+        AfficcherEmplyeesNonAssigne();
+        salleArchivers.splice(salleArchivers.findIndex(e => e.id == id), 1);
+        localStorage.setItem('archivers', JSON.stringify(salleArchivers));
+        AfficherEmplyersArchivers();
+        return; 
+    }
+  
+}
+
+
 
 
 
