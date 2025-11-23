@@ -17,17 +17,17 @@
 <body>
 
     <head>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg  fixed-top navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Staff Manager</a>
             </div>
         </nav>
     </head>
 
-    <div class="container-fluid mt-3">
+    <div class="container-fluid mt-5">
         <div class="row">
             <!-- <div class="col-1"></div> -->
-            <div class="col-sm-12 col-xl-3  border border-primary d-flex flex-column vh-100 content-div">
+            <div class="col-sm-11 col-xl-3  border  content-div">
                 <h6 class="mt-1">les employees(non assigne)</h6>
                 <div class="col-12 mt-5">
                     <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">ajouter
@@ -43,19 +43,19 @@
 
 
             <div
-                class="col-md-12 col-xl-9  col-d-flex flex-column justify-content-around  border vh-100 content-div-services">
+                class="col-sm-11 col-xl-9  d-flex flex-column justify-content-around  border vh-100 content-div-services">
                 <div class="row card-role d-flex flex-row sm-d-flex-column justify-content-around">
 
-                    <div id="salleReception" data-name="Salle Réception" class="col-12 col-xl-3 h-sm-100 card-zone">
+                    <div id="salleReception" data-name="Salle Réception" class="col-md-6 col-xl-3 h-sm-100 card-zone">
                         <h5 class="text-success roleName">Salle Réception</h5>
-                        <div class="card flex-column gap-1  w-75 card-item" id="card-reception">
+                        <div class="card flex-column gap-1   w-75 card-item" id="card-reception">
                             <!-- ici le code -->
                         </div>
                             <button class="assigne" data-bs-toggle="modal" data-bs-target="#staticBackdrop">+</button>
 
                     </div>
 
-                    <div id="salleServeurs" class="col-12 col-xl-3 h-sm-100 card-zone">
+                    <div id="salleServeurs" class="col-md-6 col-xl-3 h-sm-100 card-zone">
                         <h5 class="text-success roleName">Salle serveurs</h5>
 
                         <div class="card flex-column gap-1  w-75 card-item" id="card-serveurs">
@@ -64,7 +64,7 @@
                             <button class="assigne" data-bs-toggle="modal" data-bs-target="#staticBackdrop">+</button>
                     </div>
 
-                    <div class="col-12 col-xl-3 h-sm-100 card-zone">
+                    <div id="salleSecurite" class="col-md-6 col-xl-3 h-sm-100 card-zone">
                         <h5 class="text-success roleName">Salle Sécurité</h5>
                         <div class="card flex-column gap-1 w-75 card-item" id="card-securite">
                             <!-- ici -->
@@ -76,7 +76,7 @@
 
                 <div class="row card-role d-flex flex-row justify-content-around">
 
-                    <div id="salleStaff" class="col-12 col-xl-3 h-sm-100  border border-danger card-zone">
+                    <div id="salleConference" class="col-md-6 col-xl-3 h-sm-100  border border-danger card-zone">
                         <h5 class="text-success roleName">Salle Conference</h5>
                         <div class="card flex-column gap-1   w-75 card-item" id="card-conference">
                             <!-- ici -->
@@ -85,7 +85,7 @@
                             <button class="assigne" data-bs-toggle="modal" data-bs-target="#staticBackdrop">+</button>
                     </div>
 
-                    <div class="col-12 col-xl-3 h-sm-100  border border-danger card-zone">
+                    <div id="sallStaff" class="col-md-6 col-xl-3 h-sm-100  border border-danger card-zone">
                         <h5 class="text-success roleName">staff Rom</h5>
                         <div class="card flex-column gap-1   w-75 card-item" id="card-staffRome">
                             <!-- ici -->
@@ -96,7 +96,7 @@
 
 
                     </div>
-                    <div class="col-xl-3 col-sm-1 h-sm-100   border border-danger card-zone">
+                    <div id="salleArchiver" class="col-md-6 col-xl-3 col-sm-1 h-sm-100   border border-danger card-zone">
                         <h5 class="text text-success roleName">Salle Archiver</h5>
                         <div class="card flex-column gap-1  w-75 card-item" id="card-archiver">
                             <!-- ici -->

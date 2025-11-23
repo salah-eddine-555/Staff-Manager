@@ -1,26 +1,28 @@
 .content-div{
-    height: 100vh !important;
+    height: 90% !important;
 
 }
-
 
 .content-div-services .card-role{
     height: 45%;
     width: 100%;
+   
     /* background-color: rgb(210, 210, 210); */
 }
 
 .content-div-services .card-role .card-zone{
-    background-color: #c8e1f0;
+    background-color: #b3d5eb;
     width: 30%;
     border-radius: 20px;
     border: 2px solid  rgb(94, 222, 245) !important;
 }
+
 .card-item {
     width: auto;
     height: 200px;
-    background-color: #c8e1f0;
     border: none;
+    
+    background-color: #b3d5eb;
    
 }
 

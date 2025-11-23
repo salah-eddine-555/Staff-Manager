@@ -138,7 +138,7 @@ function AfficcherEmplyeesNonAssigne() {
          if (!employer) return;
 
         cardEmplyees += `
-                <div class="row card mt-2 d-flex flex-row">
+                <div class="row card  mt-2 d-flex flex-row">
                     <div class="card-head mt-3 col-3">
                         <img class="w-100 h-50 rounded-circle" src="profile.png" alt="">
                     </div>
@@ -185,7 +185,7 @@ function ListesEmployees(nameZone) {
             || (nameZone == 'Salle Réception' && employer.role == 'manager')
             || (nameZone == 'Salle Réception' && employer.role == 'nettoyage')) {
             listEmplyees += `
-            <div class="card flex-row gap-2 h-25 w-100 card-workers" data-id=${employer.id}>
+            <div class="card  flex-row gap-2 h-25 w-100 card-workers" data-id=${employer.id}>
                             <div class="card-head">
                                 <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
                             </div>
@@ -207,7 +207,7 @@ function ListesEmployees(nameZone) {
             || (nameZone == 'Salle serveurs' && employer.role == 'manager')
             || (nameZone == 'Salle serveurs' && employer.role == 'nettoyage')) {
             listEmplyees += `
-            <div class="card flex-row gap-2 h-25 w-100 card-workers" data-id=${employer.id}>
+            <div class="card  flex-row gap-2 h-25 w-100 card-workers" data-id=${employer.id}>
                             <div class="card-head">
                                 <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
                             </div>
@@ -313,11 +313,14 @@ function AffichageEmployesReception() {
     document.getElementById("card-reception").innerHTML = '';
     let carReception = '';
 
-    // if(salleReceptions.length == 0){
-    //     document.getElementById("salleReception").style.backgroundColor = 'red';
-    // }else{
-    //     document.getElementById("salleReception").style.backgroundColor = '';     
-    // }
+    if(salleReceptions.length === 0){
+        document.getElementById("card-reception").style.display = 'none';
+        document.getElementById("salleReception").style.backgroundColor = 'rgba(175, 89, 89, 0.382)'
+       
+    }else{
+        document.getElementById("card-reception").style.display = 'block';
+         document.getElementById("salleReception").style.backgroundColor = ''     
+    }
 
     for (receptioniste of salleReceptions) {
         carReception += `
@@ -343,10 +346,18 @@ function AffichageEmployesReception() {
 
 
 function AffichageEmployesServeurs() {
-
-    console.log('affiche serveru 1');
     document.getElementById("card-serveurs").innerHTML = '';
+    
     let carReception = '';
+
+      if(salleServeurs.length === 0){
+        document.getElementById("card-serveurs").style.display = 'none';
+        document.getElementById("salleServeurs").style.backgroundColor = 'rgba(175, 89, 89, 0.382)'
+       
+    }else{
+        document.getElementById("card-serveurs").style.display = 'block';
+         document.getElementById("salleServeurs").style.backgroundColor = ''     
+    }
 
     for (receptioniste of salleServeurs) {
         carReception += `
@@ -363,7 +374,7 @@ function AffichageEmployesServeurs() {
                     </div>
                    
         `
-        document.getElementById("card-serveurs").innerHTML += carReception;
+        document.getElementById("card-serveurs").innerHTML = carReception;
     }
 
 
@@ -372,6 +383,16 @@ function AffichageEmployesServeurs() {
 function AffichageEmployesSecurites() {
      document.getElementById("card-securite").innerHTML = '';
     let carReception = '';
+
+    if(salleSecurites.length === 0){
+        document.getElementById("card-securite").style.display = 'none';
+        document.getElementById("salleSecurite").style.backgroundColor = 'rgba(175, 89, 89, 0.382)'
+       
+    }else{
+        document.getElementById("card-securite").style.display = 'block';
+         document.getElementById("salleSecurite").style.backgroundColor = ''     
+    }
+  
 
     for (receptioniste of salleSecurites) {
         carReception += `
@@ -398,6 +419,17 @@ function AfficherEmployesConferences() {
     document.getElementById("card-conference").innerHTML = '';
     let carReception = '';
 
+
+     if(salleConferences.length === 0){
+        document.getElementById("card-conference").style.display = 'none';
+        document.getElementById("salleConference").style.backgroundColor = 'rgba(175, 89, 89, 0.382)'
+       
+    }else{
+        document.getElementById("card-conference").style.display = 'block';
+         document.getElementById("salleConference").style.backgroundColor = ''     
+    }
+  
+
     for (receptioniste of salleConferences) {
         carReception += `
                     <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
@@ -423,9 +455,17 @@ function AfficherEmplyoesStaffRom() {
      
      document.getElementById("card-staffRome").innerHTML = '';
     let carReception = '';
+
+    if(sallestaffRoms.length === 0){
+        document.getElementById("card-staffRome").style.display = 'none';
+        document.getElementById("sallStaff").style.backgroundColor = 'rgba(175, 89, 89, 0.382)'
+       
+    }else{
+        document.getElementById("card-staffRome").style.display = 'block';
+         document.getElementById("sallStaff").style.backgroundColor = ''     
+    }
     
     for (receptioniste of sallestaffRoms) {
-        console.log(33);
         carReception += `
                      <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
                          <div class="col-3 card-head">
@@ -450,6 +490,15 @@ function AfficherEmplyersArchivers() {
     document.getElementById("card-archiver").innerHTML = '';
     let carReception = '';
 
+      if(salleArchivers.length === 0){
+        document.getElementById("card-archiver").style.display = 'none';
+        document.getElementById("salleArchiver").style.backgroundColor = 'rgba(175, 89, 89, 0.382)'
+       
+    }else{
+        document.getElementById("card-archiver").style.display = 'block';
+         document.getElementById("salleArchiver").style.backgroundColor = ''     
+    }
+
     for (receptioniste of salleArchivers) {
         carReception += `
                      <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
@@ -463,7 +512,6 @@ function AfficherEmplyersArchivers() {
                            <button class="btn btn-link supprimer" id=${receptioniste.id}><i class="bi bi-trash text-danger"></i></button>
                         </div>
                     </div>
-                   
         `
         document.getElementById("card-archiver").innerHTML = carReception;
 
@@ -504,10 +552,6 @@ function AddWorkertoSalle(nameZone) {
         // On fait la verification par zone premierment 
 
         if (nameZone.trim() === 'Salle Réception') {
-            if (!['reception', 'manager', 'nettoyage'].includes(worker.role)) {
-                alert("Rôle non autorisé pour cette salle.");
-                return;
-            }
             if (salleReceptions.length >= 4) {
                 alert("cette zone est remplie");
                 return;
@@ -521,10 +565,6 @@ function AddWorkertoSalle(nameZone) {
         }
 
         if (nameZone.trim() === 'Salle serveurs') {
-            if (!['Techniciens IT', 'manager', 'nettoyage'].includes(worker.role)) {
-                // alert("Rôle non autorisé pour cette salle.");
-                return;
-            }
             if (salleServeurs.length >= 3) { // CORRECTION : vérifier salleServeurs
                 alert("la salle est remplie");
                 return;
@@ -538,10 +578,6 @@ function AddWorkertoSalle(nameZone) {
         }
 
         if (nameZone.trim() === 'Salle Sécurité') {
-            if (!['Securite', 'manager', 'nettoyage'].includes(worker.role)) {
-                alert("Rôle non autorisé pour cette salle.");
-                return;
-            }
             if (salleSecurites.length >= 3) {
                 alert("la salle est remplie");
                 return;
@@ -555,10 +591,6 @@ function AddWorkertoSalle(nameZone) {
         }
 
         if (nameZone.trim() === 'Salle Conference') {
-            if (!['manager', 'Securite', 'nettoyage', 'Techniciens IT'].includes(worker.role)) {
-                alert("Rôle non autorisé pour cette salle.");
-                return;
-            }
              if (salleConferences.length >= 3) {
                 alert("la salle est remplie");
                 return;
@@ -572,11 +604,6 @@ function AddWorkertoSalle(nameZone) {
         }
 
         if (nameZone.trim() === 'staff Rom') {
-            if (!['manager', 'nettoyage', 'Techniciens IT'].includes(worker.role)) {
-                alert("Rôle non autorisé pour cette salle.");
-                return;
-            }
-
             if(sallestaffRoms.length >= 3){
                 alert("la salle est remplie");
                 return;
@@ -590,11 +617,6 @@ function AddWorkertoSalle(nameZone) {
         }
 
         if (nameZone.trim() === 'Salle Archiver') {
-            if (!['manager'].includes(worker.role)) {
-                alert("Rôle non autorisé pour cette salle.");
-                return;
-            }
-
             if(salleArchivers.length >= 2){
                 alert("la salle est remplie");
                 return;
@@ -630,7 +652,7 @@ document.addEventListener("click", (e) => {
 function AfficherDetailsProfile(id) {
 
     let html = "";
-    document.getElementById('detais-worker').innerHTML = " ";
+    document.getElementById('detais-worker').innerHTML = "";
 
 
 
@@ -665,13 +687,8 @@ function AfficherDetailsProfile(id) {
                             <p class="mb-0"><strong>Durée :</strong> ${exper.duree}</p>
                         </div>
                     `
-
-        })
-            
+        })        
     };
-
-
-
     document.getElementById('detais-worker').innerHTML += html;
 }
 
