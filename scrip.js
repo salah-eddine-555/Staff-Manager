@@ -14,7 +14,7 @@ window.addEventListener('load', () => {
     salleServeurs = JSON.parse(localStorage.getItem('serveurs')) || [];
     AffichageEmployesServeurs();
 
-    salleSecurites =  JSON.parse(localStorage.getItem('securites')) || [];
+    salleSecurites = JSON.parse(localStorage.getItem('securites')) || [];
     AffichageEmployesSecurites()
 
     salleConferences = JSON.parse(localStorage.getItem('confreneces')) || [];
@@ -39,12 +39,6 @@ let salleConferences = []
 let salleArchivers = []
 
 
-
-
-
-
-
-
 document.getElementById('btn-dynamique').addEventListener('click', () => {
     FormDynamique();
 })
@@ -52,11 +46,13 @@ document.getElementById('btn-dynamique').addEventListener('click', () => {
 
 function FormDynamique() {
     let card = `
-        <label class="form-label " for="company">company :</label>
-        <input class="form-control" id="company" name="company" type="text">
+        <div class="experiences">
+                <label class="form-label " for="company">company :</label>
+                <input class="form-control company" id="company" name="company" type="text">
 
-         <label for="duree">duree : </label>
-         <input class="form-control" id="duree" name="duree" type="text">
+                 <label for="duree">duree : </label>
+                 <input class="form-control duree" id="duree" name="duree" type="text">
+         </div>
     `
     document.getElementById('card-dynamique').innerHTML += card;
 
@@ -78,11 +74,13 @@ function ValidationDataNoveauEmplyee() {
         const tele = form.tele.value;
         const localisation = form.localisation.value;
 
+        let experiences = []
+        document.querySelectorAll('.experiences').forEach(exp => {
+            const company = exp.querySelector('.company').value;
+            const duree = exp.querySelector('.duree').value;
+            if (company !== '' && duree !== '') experiences.push({ company, duree });
 
-
-
-        const company = document.getElementById('company').value;
-        const duree = document.getElementById('duree').value;
+        })
 
         //validation regex 
         const validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -103,8 +101,7 @@ function ValidationDataNoveauEmplyee() {
                 role: role,
                 tele: tele,
                 localisation: localisation,
-                expreiences: [{ company: company, duree: duree }]
-
+                expreiences: experiences
             }
 
 
@@ -138,6 +135,7 @@ function AfficcherEmplyeesNonAssigne() {
     let cardEmplyees = '';
 
     employers.forEach(employer => {
+         if (!employer) return;
 
         cardEmplyees += `
                 <div class="row card mt-2 d-flex flex-row">
@@ -159,6 +157,8 @@ function AfficcherEmplyeesNonAssigne() {
 }
 
 
+
+
 // lorsque le click sur une button pour ajouter emplyer est afficher la listes des emplyes
 
 //  le role de ce event c'est donner les nameZones des buttons clicke a 
@@ -174,18 +174,16 @@ document.querySelectorAll(".assigne").forEach(btn => {
 
 // fonction qui lister les emplyer non assigne pour assigne le a une salles 
 function ListesEmployees(nameZone) {
+    document.getElementById('modal-body').innerHTML = '';
     let listEmplyees = '';
 
-    document.getElementById('modal-body').innerHTML = "";
+    // document.getElementById('modal-body').innerHTML = "";
 
     employers.forEach(employer => {
 
         if ((nameZone == 'Salle Réception' && employer.role == 'reception')
             || (nameZone == 'Salle Réception' && employer.role == 'manager')
             || (nameZone == 'Salle Réception' && employer.role == 'nettoyage')) {
-
-
-
             listEmplyees += `
             <div class="card flex-row gap-2 h-25 w-100 card-workers" data-id=${employer.id}>
                             <div class="card-head">
@@ -208,7 +206,6 @@ function ListesEmployees(nameZone) {
         if ((nameZone == 'Salle serveurs' && employer.role == 'Techniciens IT')
             || (nameZone == 'Salle serveurs' && employer.role == 'manager')
             || (nameZone == 'Salle serveurs' && employer.role == 'nettoyage')) {
-
             listEmplyees += `
             <div class="card flex-row gap-2 h-25 w-100 card-workers" data-id=${employer.id}>
                             <div class="card-head">
@@ -268,10 +265,13 @@ function ListesEmployees(nameZone) {
             document.getElementById('modal-body').innerHTML = listEmplyees;
         }
 
+        if ((nameZone == 'staff Rom' && employer.role == 'manager')
+            || (nameZone == 'staff Rom' && employer.role == 'Techniciens IT')
+            || (nameZone == 'staff Rom' && employer.role == 'nettoyage')
+            || (nameZone == 'staff Rom' && employer.role == 'Securite')) {
 
-        if (nameZone == 'Salle Archiver' && employer.role == 'manager') {
             listEmplyees += `
-            <div class="card flex-row gap-2 h-25 w-100 card-workers" data-id=${employer.id}>
+            <div class="card flex-row gap-2 h-25 w-100 card-workers"  data-id=${employer.id}>
                             <div class="card-head">
                                 <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
                             </div>
@@ -286,13 +286,9 @@ function ListesEmployees(nameZone) {
         `
             document.getElementById('modal-body').innerHTML = listEmplyees;
         }
-
-        if ((nameZone == 'staff Rom' && employer.role == 'manager')
-            || (nameZone == 'staff Rom' && employer.role == 'Techniciens IT')
-            || (nameZone == 'staff Rom' && employer.role == 'nettoyage')
-            || (nameZone == 'staff Rom' && employer.role == 'Securite')) {
+        if (nameZone == 'Salle Archiver' && employer.role == 'manager') {
             listEmplyees += `
-            <div class="card flex-row gap-2 h-25 w-100 card-workers"  data-id=${employer.id}>
+            <div class="card flex-row gap-2 h-25 w-100 card-workers" data-id=${employer.id}>
                             <div class="card-head">
                                 <img class="w-100 h-100 rounded-circle" src="profile.png" alt="">
                             </div>
@@ -314,7 +310,14 @@ function ListesEmployees(nameZone) {
 
 
 function AffichageEmployesReception() {
+    document.getElementById("card-reception").innerHTML = '';
     let carReception = '';
+
+    // if(salleReceptions.length == 0){
+    //     document.getElementById("salleReception").style.backgroundColor = 'red';
+    // }else{
+    //     document.getElementById("salleReception").style.backgroundColor = '';     
+    // }
 
     for (receptioniste of salleReceptions) {
         carReception += `
@@ -340,6 +343,7 @@ function AffichageEmployesReception() {
 
 
 function AffichageEmployesServeurs() {
+
     console.log('affiche serveru 1');
     document.getElementById("card-serveurs").innerHTML = '';
     let carReception = '';
@@ -366,6 +370,7 @@ function AffichageEmployesServeurs() {
 }
 
 function AffichageEmployesSecurites() {
+     document.getElementById("card-securite").innerHTML = '';
     let carReception = '';
 
     for (receptioniste of salleSecurites) {
@@ -390,6 +395,7 @@ function AffichageEmployesSecurites() {
 }
 
 function AfficherEmployesConferences() {
+    document.getElementById("card-conference").innerHTML = '';
     let carReception = '';
 
     for (receptioniste of salleConferences) {
@@ -414,9 +420,12 @@ function AfficherEmployesConferences() {
 }
 
 function AfficherEmplyoesStaffRom() {
+     
+     document.getElementById("card-staffRome").innerHTML = '';
     let carReception = '';
-
+    
     for (receptioniste of sallestaffRoms) {
+        console.log(33);
         carReception += `
                      <div class="d-flex flex-row card-employees" data-id=${receptioniste.id}>
                          <div class="col-3 card-head">
@@ -431,13 +440,15 @@ function AfficherEmplyoesStaffRom() {
                     </div>
                    
         `
+        
         document.getElementById("card-staffRome").innerHTML = carReception;
 
     }
 }
 
 function AfficherEmplyersArchivers() {
-     let carReception = '';
+    document.getElementById("card-archiver").innerHTML = '';
+    let carReception = '';
 
     for (receptioniste of salleArchivers) {
         carReception += `
@@ -454,148 +465,152 @@ function AfficherEmplyersArchivers() {
                     </div>
                    
         `
-        document.getElementById("card-staffRome").innerHTML = carReception;
+        document.getElementById("card-archiver").innerHTML = carReception;
 
     }
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
 // Exemple corrigé : ajout d'un worker à une salle via clique sur une .card-workers dans le modal
 function AddWorkertoSalle(nameZone) {
-  const modal = document.getElementById('modal-body');
+    const modal = document.getElementById('modal-body');
 
- 
-  const handler = (e) => {
-    const card = e.target.closest('.card-workers');
-    if (!card) {
-        alert('tu est clikc hor de la cart')
-        return;
-    }
 
-    const IdWorker = card.dataset.id;
-    const worker = employers.find(emp => emp.id == IdWorker);
-  
-    if (!worker) {
-      alert("Employé introuvable.");
-      return;
-    }
+    const handler = (e) => {
+        const card = e.target.closest('.card-workers');
+        if (!card) {
+            alert('tu est clikc hor de la cart')
+            return;
+        }
 
-    
+        const IdWorker = card.dataset.id;
+        const worker = employers.find(emp => emp.id == IdWorker);
 
-    //fonction pour supprimer le emplyer depuis la list est refrecher la liste 
-    const removeFromPool = (id) => {
-      const idx = employers.findIndex(e => e.id == id);
-      if (idx !== -1) employers.splice(idx, 1);
-      AfficcherEmplyeesNonAssigne();
+        if (!worker) {
+            alert("Employé introuvable.");
+            return;
+        }
+
+
+
+        //fonction pour supprimer le emplyer depuis la list est refrecher la liste 
+        const removeFromPool = (id) => {
+            const idx = employers.findIndex(e => e.id == id);
+            if (idx !== -1) employers.splice(idx, 1);
+            AfficcherEmplyeesNonAssigne();
+        };
+
+        // On fait la verification par zone premierment 
+
+        if (nameZone.trim() === 'Salle Réception') {
+            if (!['reception', 'manager', 'nettoyage'].includes(worker.role)) {
+                alert("Rôle non autorisé pour cette salle.");
+                return;
+            }
+            if (salleReceptions.length >= 4) {
+                alert("cette zone est remplie");
+                return;
+            }
+            salleReceptions.push(worker);
+            AffichageEmployesReception();
+            localStorage.setItem('receptions', JSON.stringify(salleReceptions));
+            removeFromPool(IdWorker);
+            localStorage.setItem('worker', JSON.stringify(employers));
+            return;
+        }
+
+        if (nameZone.trim() === 'Salle serveurs') {
+            if (!['Techniciens IT', 'manager', 'nettoyage'].includes(worker.role)) {
+                // alert("Rôle non autorisé pour cette salle.");
+                return;
+            }
+            if (salleServeurs.length >= 3) { // CORRECTION : vérifier salleServeurs
+                alert("la salle est remplie");
+                return;
+            }
+            salleServeurs.push(worker);
+            AffichageEmployesServeurs();
+            localStorage.setItem('serveurs', JSON.stringify(salleServeurs));
+            removeFromPool(IdWorker);
+            localStorage.setItem('worker', JSON.stringify(employers));
+            return;
+        }
+
+        if (nameZone.trim() === 'Salle Sécurité') {
+            if (!['Securite', 'manager', 'nettoyage'].includes(worker.role)) {
+                alert("Rôle non autorisé pour cette salle.");
+                return;
+            }
+            if (salleSecurites.length >= 3) {
+                alert("la salle est remplie");
+                return;
+            }
+            salleSecurites.push(worker);
+            localStorage.setItem('securites', JSON.stringify(salleSecurites));
+            AffichageEmployesSecurites();
+            removeFromPool(IdWorker);
+            localStorage.setItem('worker', JSON.stringify(employers));
+            return;
+        }
+
+        if (nameZone.trim() === 'Salle Conference') {
+            if (!['manager', 'Securite', 'nettoyage', 'Techniciens IT'].includes(worker.role)) {
+                alert("Rôle non autorisé pour cette salle.");
+                return;
+            }
+             if (salleConferences.length >= 3) {
+                alert("la salle est remplie");
+                return;
+            }
+            salleConferences.push(worker);
+            localStorage.setItem('confreneces', JSON.stringify(salleConferences));
+            AfficherEmployesConferences();
+            removeFromPool(IdWorker);
+            localStorage.setItem('worker', JSON.stringify(employers));
+            return;
+        }
+
+        if (nameZone.trim() === 'staff Rom') {
+            if (!['manager', 'nettoyage', 'Techniciens IT'].includes(worker.role)) {
+                alert("Rôle non autorisé pour cette salle.");
+                return;
+            }
+
+            if(sallestaffRoms.length >= 3){
+                alert("la salle est remplie");
+                return;
+            }
+            sallestaffRoms.push(worker);
+            localStorage.setItem('sattff', JSON.stringify(sallestaffRoms));
+            AfficherEmplyoesStaffRom();
+            removeFromPool(IdWorker);
+            localStorage.setItem('worker', JSON.stringify(employers));
+            return;
+        }
+
+        if (nameZone.trim() === 'Salle Archiver') {
+            if (!['manager'].includes(worker.role)) {
+                alert("Rôle non autorisé pour cette salle.");
+                return;
+            }
+
+            if(salleArchivers.length >= 2){
+                alert("la salle est remplie");
+                return;
+            }
+            salleArchivers.push(worker);
+            AfficherEmplyersArchivers();
+            localStorage.setItem('archivers', JSON.stringify(salleArchivers));
+            removeFromPool(IdWorker);
+            localStorage.setItem('worker', JSON.stringify(employers));
+            return;
+        }
     };
 
-    // On fait la verification par zone premierment 
-
-    if (nameZone.trim() === 'Salle Réception') {
-      if (!['reception', 'manager', 'nettoyage'].includes(worker.role)) {
-        alert("Rôle non autorisé pour cette salle.");
-        return;
-      }
-      if (salleReceptions.length >= 4) { 
-        alert("cette zone est remplie");
-        return;
-      }
-      salleReceptions.push(worker);
-      AffichageEmployesReception();
-      localStorage.setItem('receptions', JSON.stringify(salleReceptions));
-      removeFromPool(IdWorker);
-      localStorage.setItem('worker', JSON.stringify(employers));
-      return;
-    }
-
-    if (nameZone.trim() === 'Salle serveurs') {
-      if (!['Techniciens IT', 'manager', 'nettoyage'].includes(worker.role)) {
-        alert("Rôle non autorisé pour cette salle.");
-        return;
-      }
-      if (salleServeurs.length >= 3) { // CORRECTION : vérifier salleServeurs
-        alert("la salle est remplie");
-        return;
-      }
-      salleServeurs.push(worker);
-      AffichageEmployesServeurs();
-      localStorage.setItem('serveurs', JSON.stringify(salleServeurs));
-      removeFromPool(IdWorker);
-      localStorage.setItem('worker', JSON.stringify(employers));
-      return;
-    }
-
-    if (nameZone.trim() === 'Salle Sécurité') {
-      if (!['Securite', 'manager', 'nettoyage'].includes(worker.role)) {
-        alert("Rôle non autorisé pour cette salle.");
-        return;
-      }
-      if (salleSecurites.length >= 3) {
-        alert("la salle est remplie");
-        return;
-      }
-      salleSecurites.push(worker);
-      localStorage.setItem('securites', JSON.stringify(salleSecurites));
-      AffichageEmployesSecurites();
-      removeFromPool(IdWorker);
-      localStorage.setItem('worker', JSON.stringify(employers));
-      return;
-    }
-
-    if (nameZone.trim() === 'Salle Conference') {
-      if (!['manager', 'Securite', 'nettoyage', 'Techniciens IT'].includes(worker.role)) {
-        alert("Rôle non autorisé pour cette salle.");
-        return;
-      }
-      salleConferences.push(worker);
-      localStorage.setItem('confreneces', JSON.stringify(salleConferences));
-      AfficherEmployesConferences();
-      removeFromPool(IdWorker);
-      localStorage.setItem('worker', JSON.stringify(employers));
-      return;
-    }
-
-    if (nameZone.trim() === 'staff Rom') {
-      if (!['manager', 'nettoyage', 'Techniciens IT'].includes(worker.role)) {
-        alert("Rôle non autorisé pour cette salle.");
-        return;
-      }
-      sallestaffRoms.push(worker);
-      localStorage.setItem('sattff', JSON.stringify(sallestaffRoms));
-      AfficherEmplyoesStaffRom();
-      removeFromPool(IdWorker);
-      localStorage.setItem('worker', JSON.stringify(employers));
-      return;
-    }
-
-    if (nameZone.trim() === 'Salle Archiver') {
-      if (!['manager'].includes(worker.role)) {
-        alert("Rôle non autorisé pour cette salle.");
-        return;
-      }
-      salleArchivers.push(worker);
-      AfficherEmplyersArchivers();
-      localStorage.setItem('archivers', JSON.stringify(salleArchivers));
-      removeFromPool(IdWorker);
-      localStorage.setItem('worker', JSON.stringify(employers));
-      return;
-    }
-  };
-
-  // on attache le listener avec once:true pour s'assurer qu'il s'exécute une seule fois
-  modal.addEventListener('click', handler, { once: true });
-//   modal.addEventListener('click', handler);
+    // on attache le listener avec once:true pour s'assurer qu'il s'exécute une seule fois
+    modal.addEventListener('click', handler, { once: true });
+    //   modal.addEventListener('click', handler);
 }
 
 
@@ -617,20 +632,10 @@ function AfficherDetailsProfile(id) {
     let html = "";
     document.getElementById('detais-worker').innerHTML = " ";
 
+
+
     // recupere emplyer par id a parties la listed des emplyes 
     let emplyoer = employers.find(emp => emp.id == id);
-
-
-
-    if (!emplyoer) {
-        alert("Non emplyoyer trouvee !");
-        return;
-    }
-
-
-
-
-
     html = `
             <div class="d-flex align-items-center mb-3">
                                 <img src="profile.png" alt="photo" class="rounded-circle me-3" width="100" height="100">
@@ -640,29 +645,33 @@ function AfficherDetailsProfile(id) {
                                     <small class="text-muted">      ${emplyoer.role}</small>
                                 </div>
                             </div>
-
-                          
                             <p class="mb-1"><strong>Email:</strong>${emplyoer.email}</p>
                             <p class="mb-3"><strong>Téléphone :</strong>${emplyoer.tele}</p>
-
-                           
                             <p class="mb-3">
                                 <strong>Localisation :</strong> ${emplyoer.localisation}
                             </p>
-                            
+                </div>
                            `
-            emplyoer.expreiences.forEach(exp => {
+    if (emplyoer.expreiences.length == 0) {
+        html += `
+                    <div class="alert alert-success">aucune expreiences</div>
+                `
+    } else {
+        emplyoer.expreiences.forEach(exper => {
             html += ` 
-                                                           <div class="p-3 bg-light rounded mb-2">
-                                                               <h6 class="text-primary mb-2">Expérience</h6>
-                                                               <p class="mb-1"><strong>Entreprise :</strong> ${exp.company}</p>
-                                                               <p class="mb-0"><strong>Durée :</strong> ${exp.duree}</p>
-                                                           </div>
-                                                       `
-    });
-    `
-        </div>                   
-        `
+                        <div class="p-3 bg-light rounded mb-2">
+                            <h6 class="text-primary mb-2">Expérience</h6>
+                            <p class="mb-1"><strong>Entreprise :</strong> ${exper.company}</p>
+                            <p class="mb-0"><strong>Durée :</strong> ${exper.duree}</p>
+                        </div>
+                    `
+
+        })
+            
+    };
+
+
+
     document.getElementById('detais-worker').innerHTML += html;
 }
 
@@ -672,84 +681,81 @@ function AfficherDetailsProfile(id) {
 
 addEventListener('click', (e) => {
 
-    let btn = e.target.closest(".supprimer");
+    let btn = e.target.closest("button.supprimer");
     // le cas click sur une autre button 
-    if(!btn) return; 
+    if (!btn) return;
     let id = btn.id
-    let nameZone = btn.closest(".card-zone").querySelectorAll('.roleName')[0].textContent; 
+  
+    let nameZone = btn.closest(".card-zone").querySelectorAll('.roleName')[0].textContent;
 
     RemoveWorkerToSall(id, nameZone);
 
-   
-    
+
+
 })
 // Salle Réception Salle serveurs  Salle Sécurité staff Rom
-
-function RemoveWorkerToSall(id, nameZone){
+function RemoveWorkerToSall(id, nameZone) {
 
     console.log(nameZone);
-    console.log(id);
+    console.log("id is ", id);
 
-    
-
-    
-
-    if(nameZone == 'Salle Réception'){
+    if (nameZone == 'Salle Réception') {
         const worker = salleReceptions.find(e => e.id == id)
-        AjouterNoveauEmployer(worker);
-    
+        employers.push(worker);
         localStorage.setItem('worker', JSON.stringify(employers));
         AfficcherEmplyeesNonAssigne();
         salleReceptions.splice(salleReceptions.findIndex(e => e.id == id), 1);
         localStorage.setItem('receptions', JSON.stringify(salleReceptions));
-        AffichageEmployesReception(); 
+        AffichageEmployesReception();
+
         return;
     }
 
-     if(nameZone == 'Salle serveurs'){
+    if (nameZone == 'Salle serveurs') {
         const worker = salleServeurs.find(e => e.id == id)
         employers.push(worker);
         localStorage.setItem('worker', JSON.stringify(employers));
         AfficcherEmplyeesNonAssigne();
         salleServeurs.splice(salleServeurs.findIndex(e => e.id == id), 1);
         localStorage.setItem('serveurs', JSON.stringify(salleServeurs));
-        AffichageEmployesServeurs(); 
+        AffichageEmployesServeurs();
+
         return;
     }
 
-     if(nameZone == 'Salle Sécurité'){
+    if (nameZone == 'Salle Sécurité') {
         const worker = salleSecurites.find(e => e.id == id)
         employers.push(worker);
         localStorage.setItem('worker', JSON.stringify(employers));
         AfficcherEmplyeesNonAssigne();
         salleSecurites.splice(salleSecurites.findIndex(e => e.id == id), 1);
         localStorage.setItem('securites', JSON.stringify(salleSecurites));
-        AffichageEmployesSecurites(); 
+        AffichageEmployesSecurites();
         return;
     }
 
-     if(nameZone == 'Salle Conference'){
+    if (nameZone == 'Salle Conference') {
         const worker = salleConferences.find(e => e.id == id)
         employers.push(worker);
         localStorage.setItem('worker', JSON.stringify(employers));
         AfficcherEmplyeesNonAssigne();
         salleConferences.splice(salleConferences.findIndex(e => e.id == id), 1);
         localStorage.setItem('confreneces', JSON.stringify(salleConferences));
-        AfficherEmployesConferences(); 
+        AfficherEmployesConferences();
         return;
     }
 
-    if(nameZone == 'staff Rom'){
+    if (nameZone == 'staff Rom') {
         const worker = sallestaffRoms.find(e => e.id == id)
         employers.push(worker);
         localStorage.setItem('worker', JSON.stringify(employers));
         AfficcherEmplyeesNonAssigne();
         sallestaffRoms.splice(sallestaffRoms.findIndex(e => e.id == id), 1);
         localStorage.setItem('sattff', JSON.stringify(sallestaffRoms));
-        AfficherEmplyoesStaffRom(); 
+        AfficherEmplyoesStaffRom();
         return;
     }
-    if(nameZone == 'Salle Archiver'){
+    if (nameZone == 'Salle Archiver') {
         const worker = salleArchivers.find(e => e.id == id)
         employers.push(worker);
         localStorage.setItem('worker', JSON.stringify(employers));
@@ -757,9 +763,9 @@ function RemoveWorkerToSall(id, nameZone){
         salleArchivers.splice(salleArchivers.findIndex(e => e.id == id), 1);
         localStorage.setItem('archivers', JSON.stringify(salleArchivers));
         AfficherEmplyersArchivers();
-        return; 
+        return;
     }
-  
+
 }
 
 
