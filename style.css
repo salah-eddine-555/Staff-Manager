@@ -21,13 +21,13 @@
     width: auto;
     height: 200px;
     border: none;
-    
     background-color: #b3d5eb;
    
 }
 
 
 .card-item .card-employees{ 
+  margin-top: 3px;
   background-color: rgb(149, 183, 231) !important;
   height: 20% !important;
   width: 100% !important;
@@ -45,13 +45,14 @@
 }
 .card-item .card-employees .card-body{
     width: 90%;
-    height: 50%;
+    height: 100%;
+    align-self: center;
+    
    
 }
 .card-item .card-employees .card-body p{
-    margin-top: -6px;
-    align-items: center;
-    font-size: 13px;   
+    
+    font-size: 10px;   
 }
 .assigne{
     background-color: rgb(92, 181, 92);
